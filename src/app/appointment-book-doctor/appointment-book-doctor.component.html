@@ -1,0 +1,211 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Book Appointment</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a [routerLink]="['/dashboard']">Home </a></li>
+                <li><a [routerLink]="['/appointment-book']">Book Appointment</a></li>
+                <li><a [routerLink]="['/appointment-book-mdication']">Medication</a></li>
+                <li><a [routerLink]="['/appointment-book-reason']">Reason for Visit</a></li>
+                <li><a [routerLink]="['/appointment-book-vitals']">Vitals</a></li> 
+                <li><a [routerLink]="['/appointment-book-doctor']">Select Doctor</a></li>  
+            </ul>
+            <p>Step 5 of 5</p>
+        </div> 
+         
+        <div class="Filter">
+            <a href="javascript:void(0);" id="FilterOpen">
+                <i  class="fa fa-filter" aria-hidden="true"></i> Filter 
+            </a>
+        </div>
+        
+        <div class="DoctorFound">
+            <div class="DoctorArea">
+                <div class="row">
+                    <div class="col-md-6" *ngFor="let doctor of doctorList">
+                        <div class="DoctorBox">
+                            <div class="DoctorHead DoctorHead2">
+                                <figure>
+                                    <img src="{{doctor.profilePic}}"> 
+                                </figure>
+                            <div class="headFlex">
+                                <h3>{{doctor.designation}} {{doctor.firstName}} {{doctor.lastName}} <span *ngIf="doctor.onlineStatus=='Online'"></span></h3>
+                                <a href="javascript:void(0)" (click)="onSelectDoctor(doctor)" class="selectPro">Select Provider</a>
+                              
+                            </div>
+                                <ul>
+                                    <li>
+                                        <img src="assets/images/male-icon.svg">  {{doctor.gender}}
+                                    </li>
+                                    <li>
+                                        <img src="assets/images/language.svg">  {{doctor.language}}
+                                    </li>
+                                    <li>
+                                        <img src="assets/images/doctor-icon.svg"> {{doctor.department}}
+                                    </li>
+                                </ul>
+                            
+                                <!-- <label class="Radio" (click)="onSelect(doctor)">
+                                    <input type="radio" name="doctor">
+                                    <span class="Radiomark"></span>
+                                </label> -->
+                            </div>
+
+                            <div class="DoctorBody">
+                                <h6><i class="fa fa-star"></i><strong>{{doctor.avgRating?doctor.avgRating:0}}</strong><span>({{doctor.reviewCount?doctor.reviewCount:0}} reviews)</span></h6>
+                                <p>{{doctor.description}}
+                                    
+                                </p>
+                                <a [routerLink]="['/appointment-book-doctor-details']" [queryParams]="{ docId:doctor._id}"   >More Info</a>
+                            </div>
+                            <div class="clear"></div>
+                            
+                            <div class="DoctorFooter" *ngIf="doctor && doctor.reviewratingDetails.length>0">
+                                <ul>
+                                    <li><img src="assets/images/chat.svg" alt=""></li>
+                                    <li  *ngFor="let come of  doctor.reviewratingDetails"><img src="{{come?.rewiewBy?.profilePic}}"> </li>
+                                   
+                                    <li *ngIf="doctor && doctor.reviewratingDetails.length>0"><strong>{{doctor.reviewCount?doctor.reviewCount:0}}</strong> Comment</li>
+                                </ul>
+                                <a href="javascript:void(0);" class="Arrow"><i class="fa fa-angle-right"></i></a>
+                            </div>
+
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+         
+            <!-- <div class="CommonButon">
+                <button class="Button" (click)="onNextSelect()"> Next <img src="assets/images/next-arrow.svg" /></button>
+            </div> -->
+        </div>
+ 
+        <div  *ngIf="doctorList.length==0" class="NoFound">
+            <p>No doctors found as per your search. Please clear your filters if applied any.</p>
+        </div>
+
+    </div>
+</div>
+
+<form  [formGroup]="filterGroup" class="FilterArea">
+    
+    <div class="FilterHead">
+        <a href="javascript:void(0);" id="Close" class="Close">x</a>
+        <h6>Filter</h6>
+        <h6><a   (click)="onReset()" href="javascript:void(0);">Reset All</a></h6>
+    </div>
+
+    <div class="FilterBox">
+        <label>Available for Virtual Consult</label>
+        <ol>
+            <li>
+                <input value="all" formControlName="available" type="radio" name="available" checked>
+                <span>All</span>
+            </li>
+            <li>
+                <input  value="today" formControlName="available"type="radio" name="available">
+                <span>Today</span>
+            </li>
+            <li>
+                <input value="week" formControlName="available"  type="radio" name="available">
+                <span>This Week</span>
+            </li>
+            <li>
+                <input value="month"  formControlName="available" type="radio" name="available">
+                <span>This Month</span>
+            </li>
+        </ol>
+    </div>
+
+    <!-- <div class="FilterBox">
+        <label>Speciality</label>
+        <div class="Search">
+            <span class="Icon"><img src="assets/images/Search.svg"></span> 
+            <input formControlName="speciality"  type="text" placeholder="Search Speciality..." class="form-control">
+        </div>
+        <div class="FilterList">
+            <span> Radiation Oncology <a href="javascript:void(0);">×</a></span>
+            <span> Urology <a href="javascript:void(0);">×</a></span>
+        </div>
+    </div> --> 
+
+    <div class="FilterBox">
+        <label>Speciality</label>
+        <div class="Search"> 
+            <ng-multiselect-dropdown  formControlName="speciality"  [placeholder]="'Select Speciality'" [settings]="dropdownSettings" [data]="specialityList" > </ng-multiselect-dropdown>
+        </div>
+    </div>
+
+    <div class="FilterBox">
+        <label>Speciality</label>
+        <div class="Search"> 
+            <select class="form-control"> 
+                <option>Select Speciality</option>
+                <option *ngFor="let spec of specialityList" value="spec">{{spec}}</option>
+            </select>
+        </div>  
+        <div class="FilterList">
+            <span>Allergy & Immunology <a href="javascript:void(0);">×</a></span>
+            <span>Anesthesiology <a href="javascript:void(0);">×</a></span>
+        </div>
+    </div>
+
+    <div class="FilterBox">
+        <label>Doctor Status</label>
+        <label class="CheckBox">Online
+            <input formControlName="onlinestatus"  type="checkbox">
+            <span class="Checkmark"></span>
+        </label>
+        <label class="CheckBox">Offline
+            <input  formControlName="offlinestatus" type="checkbox">
+            <span class="Checkmark"></span>
+        </label>
+    </div>
+
+    <div class="FilterBox">
+        <label>Language</label>
+        <div class="Search"> 
+            <ng-multiselect-dropdown  formControlName="language" [placeholder]="'Select language'" [settings]="LanguageSettings" [data]="languageList" > </ng-multiselect-dropdown>
+        </div>
+    </div>
+
+    <!-- <div class="FilterBox">
+        <label>Language</label>
+        <div class="Search">
+            <span class="Icon"><img src="assets/images/Search.svg"></span>
+            <input formControlName="language" type="text" placeholder="Search language" class="form-control">
+        </div>
+        <div class="FilterList">
+            <span> English <a href="javascript:void(0);">×</a></span>
+            <span> Spain <a href="javascript:void(0);">×</a></span>
+        </div>
+    </div> -->
+
+    <div class="FilterBox">
+        <label>Gender</label>
+        <ol>
+            <li>
+                <input value="All" formControlName="gender" type="radio" name="gender" checked>
+                <span>All</span>
+            </li>
+            <li>
+                <input value="Male" formControlName="gender" type="radio" name="gender">
+                <span>Male</span>
+            </li>
+            <li>
+                <input value="Female" formControlName="gender" type="radio" name="gender">
+                <span>Female</span>
+            </li> 
+        </ol>
+    </div>
+
+    <div class="FilterBox">
+        <a (click)="onGetDoctorListFilter()" href="javascript:void(0);" class="Show Close">Show doctors</a>
+    </div>
+</form>

@@ -1,0 +1,145 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+ 
+        <div class="CheckinArea">
+
+            <!-- <div class="CheckinTitle">
+                <h4>$ Free Health Dollar</h4>
+            </div> -->
+
+            <form  [formGroup]="formGroup" class="CheckEmoji">
+                <h3>{{appointmetmentList.question}}</h3>
+                <div class="EmojiBox">
+                    <div class="EmojiFirst" *ngIf="EmojiFirst == true ">
+                        <img src="assets/images/awful.svg" alt="">
+                    </div>
+                    <div class="EmojiSecond" *ngIf="EmojiSecond == true ">
+                        <img src="assets/images/bad.svg" alt="">
+                    </div>
+                    <div class="EmojiThierd" *ngIf="EmojiThierd == true ">
+                        <img src="assets/images/ok.svg" alt="">
+                    </div>
+                    <div class="EmojiFouth" *ngIf="EmojiFouth == true ">
+                        <img src="assets/images/good.svg" alt="">
+                    </div>
+                    <div class="EmojiFive" *ngIf="EmojiFive == true ">
+                        <img src="assets/images/great.svg" alt="">
+                    </div>
+                </div>
+
+                <ul>
+                    <li>
+                        <input  value="awful" formControlName="answer" type="radio" name="answer" (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                    <li>
+                        <input  value="bad" formControlName="answer"  type="radio" name="answer" (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                    <li>
+                        <input  value="ok"  formControlName="answer" type="radio" name="answer" (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                    <li>
+                        <input  value="good" formControlName="answer"  type="radio" name="answer" (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                    <li>
+                        <input  value="great"  formControlName="answer" type="radio" name="answer" (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                </ul>
+                <h6>I'm Feeling {{formGroup.value.answer}}</h6>
+            </form>
+
+            <div *ngIf="appointmetmentList.lastComplete">
+                <div class="CommonArea" *ngIf="!appointmetmentList.lastComplete.recoverdCount||appointmetmentList.lastComplete.recoverdCount==0">
+                    <div class="FellingBox">
+                        <p>Click this  <strong>Button</strong> Once you begin feeling better</p>
+                        <a href="javascript:void(0);" (click)="onSaveStatus('better')" class="Better">Feeling Better?</a>
+                    </div>
+                </div>
+    
+                <div class="CommonArea" *ngIf="!appointmetmentList.lastComplete.recoverdCount|| appointmetmentList.lastComplete.recoverdCount==0 || appointmetmentList.lastComplete.recoverdCount==1" style="margin-bottom: 20px;">
+                    <div class="FellingBox">
+                        <p>Click this  <strong>Button</strong> Once you Feel completely  Recovered</p>
+                        <a href="javascript:void(0);" (click)="onSaveStatus('recover')" class="Better">Recovered?</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="CommonArea">
+
+                <div class="CommonHead">
+                    <figure>
+                        <img src="assets/images/profile-2.svg">
+                    </figure>
+                    <h5>Insight</h5> 
+                </div>  
+                
+                <div class="Insight" *ngIf="appointmetmentList &&  appointmetmentList.weekreport && !appointmetmentList.weekreport.newUser">
+                    <h6>Select Health Range</h6>
+                    <h5>Week</h5>
+                    <div class="InsightRange">
+                        <div class="InsightRangeBix">
+                            <span class="Icon"><img src="assets/images/awful.svg" alt=""></span>
+                            <span class="Count">{{appointmetmentList?.weekreport?.awful}}</span>
+                        </div>
+                        <div class="InsightRangeBix">
+                            <span class="Icon"><img src="assets/images/bad.svg" alt=""></span>
+                            <span class="Count">{{appointmetmentList?.weekreport?.bad}}</span>
+                        </div>
+                        <div class="InsightRangeBix">
+                            <span class="Icon"><img src="assets/images/ok.svg" alt=""></span>
+                            <span class="Count">{{appointmetmentList?.weekreport?.ok}}</span>
+                        </div>
+                        <div class="InsightRangeBix">
+                            <span class="Icon"><img src="assets/images/good.svg" alt=""></span>
+                            <span class="Count">{{appointmetmentList?.weekreport?.good}}</span>
+                        </div>
+                        <div class="InsightRangeBix">
+                            <span class="Icon"><img src="assets/images/great.svg" alt=""></span>
+                            <span class="Count">{{appointmetmentList?.weekreport?.great}}</span>
+                        </div> 
+                    </div>
+
+                    <!-- <article>
+                        <figure>
+                            <img src="assets/images/emoji.svg" alt="">
+                        </figure>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#Today">Today</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#Week">Week</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Today">
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="tab-pane active" id="Week">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </article> -->
+                </div>
+                
+            </div>
+
+            <div class="CommonButon">
+                <button class="Button"  (click)="onSave()">Save</button>
+            </div>
+
+        </div>
+ 
+        
+
+    </div>
+</div>

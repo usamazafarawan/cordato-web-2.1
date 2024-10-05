@@ -1,0 +1,90 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Lab History</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a [routerLink]="['/manage-account']">Manage My Account</a></li>
+                <li><a href="javascript:void(0);">Lab History</a></li>
+            </ul>
+        </div> 
+        
+        <div class="CommonArea">
+            <div class="TableList LabTable">
+
+                <div class="TableHead">
+                    <form action="">
+                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input type="text" placeholder="Search">
+                    </form>
+                </div>
+
+                <table class="table">
+                    <tr> 
+                        <th>Test</th>
+                        <th>Ordered By</th> 
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr> 
+                        <td>Lipid Panel</td>
+                        <td>Lorem Ipsum</td>
+                        <td>10/01/2019</td>
+                        <td>10:00 AM</td>
+                        <td>
+                            <a [routerLink]="['/history-lab-details']">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                View 
+                            </a>
+                        </td>
+                    </tr> 
+                    <tr> 
+                        <td>Glucose, Plasma</td>
+                        <td>Lorem Ipsum</td>
+                        <td>10/01/2019</td>
+                        <td>10:00 AM</td>
+                        <td>
+                            <a [routerLink]="['/history-lab-details']">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                View 
+                            </a>
+                        </td>
+                    </tr> 
+                    <tr> 
+                        <td>Urinalysis, Routine</td>
+                        <td>Lorem Ipsum</td>
+                        <td>10/01/2019</td>
+                        <td>10:00 AM</td>
+                        <td>
+                            <a [routerLink]="['/history-lab-details']">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                View 
+                            </a>
+                        </td>
+                    </tr> 
+                    <tr> 
+                        <td>CMP14+CBC/D/PLT+TSH</td>
+                        <td>Lorem Ipsum</td>
+                        <td>10/01/2019</td>
+                        <td>10:00 AM</td>
+                        <td>
+                            <a [routerLink]="['/history-lab-details']">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                View 
+                            </a>
+                        </td>
+                    </tr>   
+                </table>
+                    
+            </div>
+        </div> 
+    </div>
+</div>
+
+ 

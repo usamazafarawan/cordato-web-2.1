@@ -1,0 +1,37 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>All Sessions</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a [routerLink]="['/switch-dashboard']" [queryParams]="{userId:userId}">Sessions</a></li>
+                <li><a [routerLink]="['/switch-session-view']" [queryParams]="{groupId:groupId,userId:userId}">Sessions view</a></li>
+            </ul>
+        </div>
+ 
+        
+        <div class="DashboardArea">
+            <div *ngFor="let para of appointmetmentData" class="DashboardCount" style="background-color: #EE466E;">
+                <a [routerLink]="['/switch-session-details']" [queryParams]="{userId:userId,parameterId:para.groupParameterId,groupId:groupId}">
+                    <h4>{{para?.parameters?.name}}</h4>
+                    <!-- <h4>{{para.parameters._id}}</h4> -->
+                </a>
+            </div>
+        </div>
+
+        <div class="Appstore">
+            <h4>Download the app Google play, app store to synchronize  your vitals through default health app.</h4>
+            <aside>
+                <a href="javascript:void(0);"><img src="assets/images/Store-1.svg"></a>
+                <a href="javascript:void(0);"><img src="assets/images/Store-2.svg"></a>
+            </aside>
+        </div>
+    </div>
+</div>
+
+ 

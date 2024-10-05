@@ -1,0 +1,288 @@
+.Chart{ background-color: #fff; }
+.vitals-section{
+border-style: solid;
+border-color: #909095;
+padding-top: 10px;
+padding-bottom: 10px;
+margin-bottom: 5px;
+width: 100%;
+}
+.table-strong{
+  float: left;
+}
+.vital-title{
+    color:#a0a0a0;
+   font-weight:700;
+   font-size:14px
+}
+.rectangle{
+    /* padding: 3px;
+    width: 45px;
+    height: 20px; */
+    background-color: #242D31;
+    /* margin-left: 2px;
+    float: left; */
+    height: 12px;
+    margin-left: 2px
+}
+.rectangle h6{
+    color: #51B090;
+    font-weight: bold;
+    font-size: 12px;
+}
+.rectangle img{
+    border: 0;
+    outline: none;
+    max-width: 100%;
+    width: 10px;
+    height: 12px;
+}
+.Measurement-Table-Main{
+    border-style: solid;
+border-color: #909095;
+padding: 5px;
+}
+.MeasurementTable-title{
+    color:#a0a0a0;
+    font-weight:700;
+    font-size:14px
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px red !important; 
+    border-radius: 10px;
+  } */
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #E6E6E6; 
+    border-radius: 10px;
+
+    height: 50px; /* Adjust the height as needed */
+    margin-top: 25px;
+  }
+
+  ::-webkit-scrollbar-track { background: #313030;
+border: 1px solid #000; 
+border-radius: none;}
+.list-health{
+    background-color: #222D32 !important;
+}
+.list-health label{
+    background-color: #2D2E3D !important;
+
+}
+.custom-select {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .select-icon,
+  .select-text {
+    padding: 5px;
+  }
+  
+  .splitter {
+    width: 2px;
+    height: 100%;
+    background-color: gray; /* Change background color of the splitter */
+  }
+  
+  /* Change background color for icon and text parts */
+  .select-icon {
+    background-color: lightblue;
+    float: right; /* Float the icon container to the right */
+  }
+  
+  .select-text {
+    background-color: lightgreen;
+  }
+/* Buttons */
+
+.today-chart article{
+  /* width: 210px; */
+  width: 233px;
+}
+.today-chart canvas{
+  width: 210px;
+}
+.today-chart .GraphLabel{
+  width: 210px;
+}
+    /* Buttons */
+ 
+    .row {
+      display: -ms-flexbox !important;
+      display: flex !important;
+      -ms-flex-wrap: wrap !important;
+      flex-wrap: wrap !important;
+      margin-right: -15px !important;
+      margin-left: 0px !important;
+
+    }
+
+    .MeasurementTable th:nth-child(1){
+      padding: 0px !important;
+    }
+    .analysis{
+      border-style: solid;
+      border-color: #909095;
+      padding: 5px;
+    }
+
+    .DashboardGraph article .GraphLabel{
+      padding: 0 0 10px 0px;
+      display: flex;
+      margin: -10px 0 0 15px;
+  }
+  .DashboardGraph article .measurement-chart{
+    padding: 0 0 10px 0px;
+    display: flex;
+    margin: -10px 0 0 0px;
+  }
+  .measurement-chart span{
+    color: #fff;
+    font-size: 10px;
+    transform: rotate(-45deg);
+    text-align: center;
+  }
+
+  .measurement-table-row td strong{
+    font-size: 18px;
+  }
+
+
+  .first-card{
+    /* height: 15vh; */
+    border-radius: 15px;
+    background-color: #15B2B2;
+    color: #fff;
+    font-size: 10px;
+  }
+  .second-card{
+    width: 32%;
+    border-radius: 10px;
+    background-color: #1EA1F3;
+    color: #fff;
+    font-size: 10px;
+    height:65px;
+  }
+  .third-card{
+    width: 32%;
+    border-radius: 10px;
+    background-color: #FE932A;
+    color: #fff;
+    font-size: 10px;
+    height:65px;
+  }
+  .fourth-card{
+    width: 32%;
+    border-radius: 10px;
+    background-color: #15B2B2;
+    color: #fff;
+    font-size: 10px;
+    height:65px;
+  }
+  .card-text span{
+    font-weight: bold;
+  }
+  .form-select {
+    background-color: #373636; /* Change this to the desired background color */
+    color: #a0a0a0;
+  }
+
+  /* Customize the text color */
+  .form-select option {
+    color: #a0a0a0; /* Change this to the desired text color */
+  }
+  .button-selection{
+    background-color: #373636; 
+
+  }
+  .button-selection button{
+    background-color: #373636; 
+    color:#a0a0a0 ;
+  }
+
+  .chart-first article .GraphLabel{
+    padding: 0 0 10px 0px;
+    display: flex;
+    margin: -10px 0 0 15px;
+}
+
+.chart-first article .GraphLabel span{
+    color: #fff;
+    font-size: 8px;
+    transform: rotate(-45deg);
+    text-align: center;
+    width: 210px;
+}
+
+.data{
+display: flex;
+justify-content: center;
+flex-direction: row ;;
+}
+
+
+.MeasurementTable select{min-width:225px;margin:auto;display:block;border:1px solid #ddd;padding:10px 10px;font-size:13px;border-radius:5px;font-weight:600;color:#000}
+/* .MeasurementTable th{color:#a0a0a0;font-size:14px;font-weight:600;margin-bottom:15px;line-height:30px;padding:10px 5px}
+.MeasurementTable th:nth-child(1){width:0%}
+.MeasurementTable th:nth-child(2){width:0%} */
+.MeasurementTable th:nth-child(3){width:40%}
+.MeasurementTable td{color:#fff;font-size:14px;padding:10px 0; position: relative;}
+.MeasurementTable td strong{text-align:center;display:block;font-size:22px;padding:0 10px;color:#b8db9b;font-weight:800}
+.MeasurementTable td .rectangle{margin: auto;}
+
+/* .MeasurementTable td canvas{background-color:#242d31;width:100% !important;height:150px !important} */
+.MeasurementTable td .chartjs-size-monitor{ display: none;}
+
+.MeasurementTable td .Blank {
+    width: 90%;
+    position: absolute;
+    height: 17px;
+    top: 18px;
+}
+
+.MeasurementTable table tr:nth-child(odd) .Blank {
+    background: #2d2e3d;
+}
+
+.MeasurementTable table tr:nth-child(even) .Blank {
+    background: #2d2e3d;
+}
+
+.MeasurementTable td {
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 5px; /* Adjusted padding */
+  position: relative;
+}
+
+.MeasurementTable td:first-child {
+  padding-left: 0; /* Adjusted padding for the first td */
+}
+
+.MeasurementTable td strong {
+  text-align: center;
+  display: block;
+  font-size: 22px;
+  padding: 0 10px;
+  color: #b8db9b;
+  font-weight: 800;
+}
+.MeasurementTable th {
+  color: #a0a0a0;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  line-height: 30px;
+  padding: 10px 5px;
+  text-align: center; /* Center align text */
+}
+
+.MeasurementTable th:nth-child(3) {
+  width: 40%;
+}

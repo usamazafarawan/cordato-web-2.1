@@ -1,0 +1,132 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <form [formGroup]="formGroup" class="VaccinationArea">
+            <h1>Have you taken Covid -19 vaccination?</h1>
+            <div class="VaccinationHead">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label class="Radio">Yes
+                            <input  formControlName="vaccination"type="radio" value="Yes" name="vaccination" (change)="changeVaccination($event)">
+                            <span class="Radiomark"></span>
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="Radio">No
+                            <input formControlName="vaccination" type="radio" value="No" name="vaccination" (change)="changeVaccination($event)">
+                            <span class="Radiomark"></span>
+                        </label>
+                    </div>
+                </div>  
+            </div>
+
+            <div class="VaccinationBox" [hidden]="VaccinationForm">
+                <div class="VaccinationDate">
+                    <input formControlName="vaccinationDate" type="date" placeholder="Day">
+                    <!-- <input type="date" placeholder="Month" maxlength="2">
+                    <input type="date" placeholder="Year" maxlength="4"> -->
+                </div>  
+            <div class="yes2">
+                <label for="">Upload Image</label>  
+                <div class="yes">
+                   
+                    <span class="btn_upload">
+                        <input (change)="onFileChange($event)" type="file" id="imag1" title=""
+                            class="input-img" />
+                        <i class="fa fa-upload"></i>
+                        <p>Upload Image</p>
+                    </span>
+                    <img  src="{{formGroup.value.vaccinationReport}}" class="preview1" />
+                    <input type="button" (click)="removeReport()" id="removeImage1" value="x"
+                        class="btn-rmv1" />
+                </div>  
+            </div>          
+                <h3 *ngIf="userData?.vaccination=='Yes'">View Vaccination Report.</h3>
+                <p *ngIf="userData?.vaccination=='Yes'">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p>
+                <a *ngIf="userData?.vaccination=='Yes'" (click)="onViewImage(userData)" href="javascript:void(0);"> <i class="fa fa-eye"></i> View Image</a>
+              
+            </div> 
+
+            <div class="VaccinationBox" style="display: none;">
+                <h4><img src="assets/images/Vitals-1.svg" alt=""> Medical Chart</h4>
+                <h3>Download the Vital reports</h3>
+                <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p>
+                <a href="javascript:void(0);"> <img src="assets/images/download.svg" alt=""> Download Vital Reports</a>
+            </div>
+
+            <div class="CommonButon">
+                <button class="Button "  data-toggle="modal" (click)="onSave()">Submit</button>
+            </div>
+        </form> 
+    </div>
+</div>     
+
+<div class="modal fade" id="vacinationYes" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="position: relative;">
+          <button type="button" [routerLink]="['/medical-chart']" class="close closed" data-dismiss="modal">&times;</button>
+        <div class="modal-body">
+        <div class="vacinationStatus">
+            <h2>Vaccination Status</h2>
+            <p><span><i class="fa fa-check-circle"></i></span>Vaccined</p>
+        </div>
+        <div class="okdet">
+            <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
+         </div>
+        </div>
+
+
+      </div>
+      
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="vacinationNo" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="position: relative;">
+          <button type="button" [routerLink]="['/medical-chart']" class="close closed" data-dismiss="modal">&times;</button>
+        <div class="modal-body">
+        <div class="vacinationStatus" >
+            <h2>Vaccination Status</h2>
+            <p class="not"><span><i class="fa fa-times-circle"></i></span>Not-Vaccinated</p>
+        </div>
+        <div class="okdet">
+            <button type="button" class="btn btn-default" data-dismiss="modal" >Ok</button>
+         </div>
+        </div>
+
+
+      </div>
+      
+    </div>
+  </div>
+  <!-- <div class="modal fade" id="chart" role="dialog">
+    <div class="modal-dialog">
+    
+ 
+      <div class="modal-content" style="position: relative;">
+          <button type="button" class="close closed" data-dismiss="modal">&times;</button>
+        <div class="modal-body" style="text-align: center;">
+            <div class="VaccinationBox" style="max-width: 100%;padding: 40px;text-align: center;">
+                 <h4><img src="assets/images/Vitals-1.svg" alt=""> Medical Chart</h4>
+                <h3>View Vaccination Report.</h3>
+                <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p>
+                <a href="javascript:void(0);"> <img src="assets/images/download.svg" alt=""> Download Vital Reports</a>
+            
+          
+            </div>
+        </div>
+
+
+      </div>
+      
+    </div>
+  </div> -->

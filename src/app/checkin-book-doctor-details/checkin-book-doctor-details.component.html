@@ -1,0 +1,81 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Book Appointment</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <!-- <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Book Appointment</a></li>
+                <li><a href="javascript:void(0);">Medication</a></li>
+                <li><a href="javascript:void(0);">Reason for Visit</a></li>
+                <li><a href="javascript:void(0);">Vitals</a></li>  -->
+                <li><a [routerLink]="['/chekin-book-doctor']">Doctor</a></li>  
+                <li><a href="javascript:void(0);">Doctor Info</a></li> 
+            </ul> 
+        </div>  
+         
+        <div class="CommonArea">
+            <div class="DoctorProfile">
+                <figure>
+                    <img src="{{doctorData?.profilePic}}">
+                </figure>
+                <ul>
+                    <li>
+                        <label>First Name</label>
+                        <span>{{doctorData?.firstName}} </span>
+                    </li>
+                    <li>
+                        <label>Last Name</label>
+                        <span>{{doctorData?.lastName}}</span>
+                    </li>
+                    <li>
+                        <label>Email</label>
+                        <span>{{doctorData?.email}}</span>
+                    </li>
+                    <li>
+                        <label>Date Of Birth</label>
+                        <span>{{getDate(doctorData?.dob)}}</span>
+                    </li>
+                    <li>
+                        <label>Mobile</label>
+                        <span>{{doctorData?.mobileNumber}} </span>
+                    </li>
+                    <li>
+                        <label>Gender</label>
+                        <span>{{doctorData?.gender}}</span>
+                    </li>
+                    <li>
+                        <label>Designation</label>
+                        <span>{{doctorData?.designation}}</span>
+                    </li>
+                    <li>
+                        <label>Department</label>
+                        <span>{{doctorData?.department}}</span>
+                    </li>
+                    <li>
+                        <label>Address</label>
+                        <span>{{doctorData?.address}}</span>
+                    </li>
+                    <li>
+                        <label>Language Spoken</label>
+                        <span>{{doctorData?.language}}</span>
+                    </li>
+                    <li>
+                        <label>Education</label>
+                        <span>{{doctorData?.education}}</span>
+                    </li> 
+                    <li>
+                        <label>Profile Description</label>
+                        <span>{{doctorData?.description}}</span>
+                    </li>
+                </ul>
+            </div>    
+        </div>
+    
+    </div>
+</div>
+ 

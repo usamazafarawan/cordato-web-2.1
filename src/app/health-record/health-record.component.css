@@ -1,0 +1,61 @@
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  input[type="file"] {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    margin-bottom: 10px;
+  }
+  
+  progress {
+    width: 100%;
+    height: 20px;
+    margin-top: 10px;
+  }
+  
+  .success-message {
+    color: green;
+  }
+  
+  .error-message {
+    color: red;
+  }
+
+  .image-container {
+    position: relative; /* Example positioning */
+    width: 214.844px; /* Fixed width */
+    height: 421.327px; /* Fixed height */
+  }
+  
+  .overlay-svg {
+    display: block; /* Ensure SVG displays as a block element */
+    width: 100%; /* Responsive width */
+    height: 100%; /* Responsive height */
+    position:absolute;
+    top:0
+  }
+  
+  .overlay-svg path {
+    fill: #000; /* Example fill color for all paths */
+    opacity: 0.5; /* Example opacity for all paths */
+  }
+
+  .AppointmentDeatils .card .card-header:before {
+    transform: rotate(180deg);
+    position: absolute;
+    right: 15px;
+  }
+
+  .AppointmentDeatils .card .card-header {
+    padding-left: 15px;
+  }
+
+  .kamcheck .nav-tabs li a {
+    color: black !important;
+  }

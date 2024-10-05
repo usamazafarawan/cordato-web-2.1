@@ -1,0 +1,138 @@
+@charset "utf-8";
+
+@media screen and (max-width: 3000px) and (min-width: 2000px) {
+ 
+}
+
+@media screen and (max-width: 3500px) and (min-width: 2000px) {
+
+}
+
+@media screen and (max-width: 2300px) and (min-width: 2000px) {
+
+}
+
+@media screen and (min-width: 1600px) {
+    .DoctorArea .col-md-6{flex: 0 0 33.33%; max-width: 33.33%;}
+    .DashboardArea .DashboardCount { padding: 60px 25px;}
+    .MedicationParameter{flex: 0 0 33.33%; max-width: 33.33%;}
+}
+
+@media screen and (max-width: 1920px) and (min-width: 1600px) {
+
+}
+
+@media screen and (max-width: 1650px) and (min-width: 1550px) {
+ 
+}
+
+@media screen and (max-width: 1450px) and (min-width: 1400px) {
+
+}
+
+@media screen and (max-width: 1400px) and (min-width: 1350px) {
+
+}
+
+@media screen and (max-width: 1300px) and (min-width: 1200px) {
+
+}
+
+@media screen and (max-width: 1199px) and (min-width: 1000px) {
+
+}
+@media screen and (max-width: 1300px){
+    .DashboardArea .DashboardCount h4{
+        font-size: 16px;
+    }
+    .DashboardArea .DashboardCount h5{
+        font-size: 17px;
+    }
+    .DashboardArea .DashboardCount a article aside p{
+        font-size: 13px;
+    }
+    .DashboardArea .DashboardCount a article aside span{
+        font-size: 17px;
+    }
+}
+
+@media screen and (max-width: 1000px){ 
+
+    .SidenavArea { transform: translate(-105%, 0px); }
+    .Main-wrapper{ margin: 0; }
+    .Header{ width: 100%; margin: 0; }
+
+    .SidenavArea{ background-color: #fff; box-shadow: 0px 0px 10px #8a8a8a;  z-index: 11; }
+    .SidenavArea.pull{ transform: translate(0%, 0px); }
+    .SidenavArea .SidenavHead .Close{ display: block;}
+
+    .DashboardArea .DashboardCount{ width: 50%; }
+    .DashboardArea .DashboardCount:nth-last-child(-n+4) { border-bottom: 2px solid #fff; }
+    .Appstore{ display: block; }
+    .Appstore aside{ width: 100%; margin: 15px 0 0 0; }
+    .Appstore aside a{ margin: 0 15px 0 0; }
+    .VaccinationHead .col-sm-2{ width: 50%; }
+    .VaccinationBox{ max-width: 275px; }
+    .NotificationArea{ padding: 10px 10px 10px 20px; }
+    .BreadcumBox{ display: block; }
+    .BreadcumBox ul{ border: none; padding: 0; margin:10px 0 0 0 ; display: block; }
+    .BreadcumBox ul li{ display: inline-block; }
+    .AccountLocationForm{ display: block; }
+    .AccountLocationForm .AccountLocationLeft{ width: 100%; }
+    .AccountLocationForm .AccountLocationRight{ width: 100%; }
+    .SubscriptionPlan article{ display: block; }
+    .SubscriptionPlan article aside{ width: 100%;  margin: 0 0 20px 0; border: none; }
+    .SubscriptionPlan article ul{ width: 100%; }
+    .SubscriptionPlan article ul li{ max-width: 100%; width: 100%; }
+    .PlanArea .PlanBox{ width: 49%; margin: 0 0 20px 0; }
+    .AvatarArea .AvatarLeft { margin: 0 0 50px 0; }
+    .CalenderRight { margin: 30px 0 0 0; }
+    .DoctorProfile figure{ float: none; margin-bottom: 20px; }
+    .SessionResponsive{ padding: 0 0 15px 0; }
+    .SessionTab{ margin: 15px 0px; }
+    .SessionTab ul li {  margin: 0 10px 10px 0; }
+    .SessionTab ul li span{ padding: 7px 20px; font-size: 14px; }
+    .DoctorConsult .DoctorBody{ display: block; }
+    .DoctorConsult .DoctorBody aside{ width: 100%; }
+    .AppointmentDeatils .PatientLeft{ margin: 0; }    
+    .AppointmentDeatils .PatientRight{ padding: 20px; }
+    .AppointmentDeatils .PatientRight figure{width:150px;height:150px;margin:0 auto 10px}
+    .AppointmentDeatils .Symptomsappointment{display:block;margin:0}
+    .AppointmentDeatils .Symptomsappointment .SymptomsLeft{width:100%}
+    .AppointmentDeatils .Symptomsappointment .SymptomsRight{width:100%!important;max-width:inherit;padding:20px 10px 0}
+    .Tablescroll .TableBox{overflow:auto}
+    .ECGBox{padding:0 20px 0 50px}
+    .ResponsiveTable table{border:0}
+    .ResponsiveTable table caption{font-size:1.3em}
+    .ResponsiveTable table thead{border:none;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}
+    .ResponsiveTable table td{border-bottom:1px solid #ddd;display:block;font-size:.8em;text-align:right}
+    .ResponsiveTable table td:first-child,
+    .ResponsiveTable table th{display:none}
+    .ResponsiveTable table td::before{content:attr(data-label);float:left;font-weight:600;margin:0 15px 0 0}
+    .ResponsiveTable table td:last-child{border-bottom:0}
+
+    #NumberModal .modal-dialog { margin: 50px auto; }
+    #MedicationModal .modal-dialog { margin: 50px auto; }
+    #DetailsModal .modal-dialog{ margin: 30px auto; }
+
+} 
+
+@media screen and (max-width: 768px){ 
+    .LoginArea.LoginReverse{ flex-direction: column-reverse; }
+    .LoginArea .LoginLeft{ padding: 50px; display: block; width: 100%; }
+    .LoginArea .LoginLeft aside{ width: 100%; } 
+    .LoginArea .LoginRight{ padding: 50px; display: block; width: 100%; }
+    .LoginArea .LoginRight aside{ width: 100%; }
+    .PlanArea .PlanBox{ width: 100%; margin: 0 0 20px 0; }
+    .PlanArea .PlanBox ul{ min-height: inherit; margin: 0 0 20px 0;}
+    .TableList.LabTable { overflow: auto; }
+    .Significant .FilterBox{ display: block; }
+    .Significant .FilterBox .form-group { margin: 0 0 15px 0; }
+    .Significant .FilterBox .form-group label{ display: inline-block; }
+    .Significant .FilterBox .form-group button{ width: 100%; }
+    .Discomfort{ display: block; }
+    .Discomfort .DiscomfortAvatar{ width: 100%; }
+    .Discomfort .DiscomfortAvatar+.DiscomfortAvatar{ margin: 10px 0 0 0; }
+    .BreadcumBox p{ top: 6px; }
+
+}

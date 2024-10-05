@@ -1,0 +1,35 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Settings</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="ButtonBox">
+            <button class="{{platform=='android'?'active':''}}" (click)="onselectPlatform('android')">Android</button>
+            <button class="{{platform=='iOS'?'active':''}}" (click)="onselectPlatform('iOS')">iOS</button>
+        </div>
+
+        <!-- <button (click)="onselectPlatform('android')">Android</button><button (click)="onselectPlatform('iOS')">iOS</button> -->
+        <div class="CommonArea" *ngFor="let group of groupData">
+            <div class="CommonHead">
+                <figure>
+                    <img src="assets/images/Vitals-1.svg">
+                </figure>
+                <h5>{{group.name}}</h5>
+                <label class="Switch">
+                    <input (click)="onClick(group)" type="checkbox" [checked]="group?.selectedGroup?.isSelected">
+                    <span class="slider"></span>
+                </label>
+            </div> 
+        </div> 
+    </div>
+</div>

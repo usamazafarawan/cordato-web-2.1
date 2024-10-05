@@ -1,0 +1,97 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Notifications</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Notifications</a></li>
+            </ul>
+        </div> 
+        
+        <div class="CommonArea"> 
+                      
+             
+            <div class="NotificationArea">
+                <ul>
+                    <li *ngFor="let noti of notificationList" class="{{noti['isSeen']?'active':''}}">
+                        <figure>
+                            <img src="assets/images/Notifications-1.svg" alt="">
+                        </figure>
+                        <figcaption>
+                            <h3>{{noti['notiTitle']}} </h3>
+                            <h6>{{noti['notiMessage']}} </h6>
+                            <p>{{getTime(noti['createdAt'])}}</p>
+                        </figcaption>
+                    </li>
+                    <!-- <li class="active">
+                        <figure>
+                            <img src="assets/images/Notifications-2.svg" alt="">
+                        </figure>
+                        <figcaption>
+                            <h6>Complete your profile to be better health consults. <a href="javascript:void(0);">Complete Profile ></a></h6>
+                            <p></p>
+                        </figcaption>
+                    </li>
+                    <li class="active">
+                        <figure>
+                            <img src="assets/images/Notifications-3.svg" alt="">
+                        </figure>
+                        <figcaption>
+                            <h6>Add credit card to start consults with doctor. <a href="javascript:void(0);">Add Credit Card ></a></h6>
+                            <p></p>
+                        </figcaption>
+                    </li> 
+                    
+                    <li>
+                        <figure>
+                            <img src="assets/images/Notifications-4.svg" alt="">
+                        </figure>
+                        <figcaption>
+                            <h6>You have been miss call from <strong>Dr. Marry</strong> at 08:20 AM today </h6>
+                            <p>1h ago</p>
+                        </figcaption>
+                    </li>
+                    
+                    <li>
+                        <figure>
+                            <img src="assets/images/Notifications-5.svg" alt="">
+                        </figure>
+                        <figcaption>
+                            <h6>You received the answer from <strong>Dr. Alan Walker</strong></h6>
+                            <p>4h ago</p>
+                        </figcaption>
+                    </li>
+                    
+                    <li>
+                        <figure>
+                            <img src="assets/images/Notifications-4.svg" alt="">
+                        </figure>
+                        <figcaption>
+                            <h6>Video call request of you with <strong>Dr. john</strong> to be canceled.</h6>
+                            <p>Yesterday, 10:58 AM</p>
+                        </figcaption>
+                    </li>
+                    
+                    <li>
+                        <figure>
+                            <img src="assets/images/Notifications-6.svg" alt="">
+                        </figure>
+                        <figcaption>
+                            <h6>Your appointment with <strong>Dr. john </strong>to be canceled.</h6>
+                            <p>Yesterday, 10:58 AM</p>
+                        </figcaption>
+                    </li> -->
+
+                </ul>
+            </div>
+         
+        </div>
+        
+
+    </div>
+</div>

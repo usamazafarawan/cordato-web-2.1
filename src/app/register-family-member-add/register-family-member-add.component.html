@@ -1,0 +1,245 @@
+<div class="LoginArea">
+  <div class="LoginLeft">
+    <aside>
+      <figure><img src="assets/images/Persoanl.svg" /></figure>
+      <h3>Lorem Ipsum is simply</h3>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever.
+      </p>
+    </aside>
+  </div>
+
+  <div class="LoginRight">
+    <aside>
+      <!-- <a [routerLink]="['/register-family-member']" class="BackButton"><i class="fa fa-long-arrow-left"></i> Back</a> -->
+      <!-- <h5 class="Step">Step 3 of 7 </h5> -->
+      <h1>Add Family Members</h1>
+      <h6>Please add your Family History</h6>
+
+      <form [formGroup]="formGroup">
+        <div class="form-group">
+          <label for="">Relation</label>
+          <select formControlName="relation" class="form-control">
+            <option value="">Select Relation</option>
+            <option value="Mother">Mother</option>
+            <option value="Father">Father</option>
+            <option value="Paternal Grandmother">Paternal Grandmother</option>
+            <option value="Paternal Grandfather">Paternal Grandfather</option>
+            <option value="Maternal Grandmother">Maternal Grandmother</option>
+            <option value="Maternal Grandfather">Maternal Grandfather</option>
+            <option value="Sister">Sister</option>
+            <option value="Brother">Brother</option>
+          </select>
+          <span class="Icon">
+            <img src="assets/images/down-arrow.svg" />
+          </span>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="
+            (formGroup.get('relation')?.hasError('required') &&
+              formGroup.get('relation')?.dirty) ||
+            (formInvalid && !this.formGroup.value.relation)
+          "
+        >
+          *Relation is required
+        </div>
+
+        <div class="form-group">
+          <label for="">Name</label>
+          <input
+            formControlName="name"
+            type="text"
+            class="form-control"
+            placeholder="Enter Name"
+          />
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="
+            (formGroup.get('name')?.hasError('required') &&
+              formGroup.get('name')?.dirty) ||
+            (formInvalid && !this.formGroup.value.name)
+          "
+        >
+          *Name is required
+        </div>
+
+        <div class="form-group">
+          <label for="">Year Birth</label>
+          <input
+            formControlName="birthYear"
+            type="text"
+            class="form-control"
+            placeholder="YYYY"
+          />
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="
+            (formGroup.get('birthYear')?.hasError('required') &&
+              formGroup.get('birthYear')?.dirty) ||
+            (formInvalid && !this.formGroup.value.birthYear)
+          "
+        >
+          *Year Birth is required
+        </div>
+
+        <div class="text-danger"
+        *ngIf="(formGroup.get('birthYear')?.hasError('pattern') && (formGroup.get('birthYear')?.dirty))">
+        *Please enter valid year
+    </div>
+
+
+        <div class="Medication" *ngFor="let para of parameterList">
+            <article>
+                <figure><img src="{{para.icon}}" /></figure>
+                <h6>{{para.name}}</h6>
+                <p>{{para.description}}</p>
+            </article>
+            <a class="MedicationOpen" href="javascript:void(0);" (click)="onSelectParameter(para)"> {{para.name}} </a> 
+            
+            <div class="MedicationList" *ngIf="selectedSubParameters.length">
+                <span *ngFor="let select of selectedSubParameters">
+                    {{select.name}} 
+                    <a href="javascript:void(0);" (click)="ondelete(select._id,para._id)">&times;</a>
+                </span>
+
+            </div>
+            
+        </div>
+
+        <div class="form-group">
+          <div class="Liveperson">
+            <label class="Radio">
+              Living
+              <input
+                formControlName="aliveStatus"
+                type="radio"
+                value="Living"
+                name="aliveStatus"
+                (change)="Deathreason($event)"
+              />
+              <span class="Radiomark"></span>
+            </label>
+            <label class="Radio">
+              Dead
+              <input
+                formControlName="aliveStatus"
+                type="radio"
+                value="Dead"
+                name="aliveStatus"
+                (change)="Deathreason($event)"
+              />
+              <span class="Radiomark"></span>
+            </label>
+          </div>
+        </div>
+
+        <div
+          class="text-danger"
+          *ngIf="
+            (formGroup.get('aliveStatus')?.hasError('required') &&
+              formGroup.get('aliveStatus')?.dirty) ||
+            (formInvalid && !this.formGroup.value.aliveStatus)
+          "
+        >
+          *Alive Status is required
+        </div>
+
+        <div [hidden]="!EnterDeathReason">
+          <div class="form-group">
+            <label for="">Year of Death</label>
+            <input
+              formControlName="deathYear"
+              type="text"
+              class="form-control"
+              placeholder="YYYY"
+            />
+          </div>
+
+          <div class="text-danger"
+                    *ngIf="(formGroup.get('deathYear')?.hasError('pattern') && (formGroup.get('deathYear')?.dirty))">
+                    *Please enter valid year
+                </div>
+
+          <!-- <div
+          class="text-danger"
+          *ngIf="
+            (formGroup.get('deathYear')?.hasError('required') &&
+              formGroup.get('deathYear')?.dirty) ||
+            (formInvalid && !this.formGroup.value.deathYear)
+          "
+        >
+          *Death year is required
+        </div> -->
+
+          <div class="form-group">
+            <label for="">Cause of Death</label>
+            <input
+              formControlName="causesOfDeath"
+              type="text"
+              class="form-control"
+              placeholder="Enter Cause of Death"
+            />
+          </div>
+          <!-- <div
+          class="text-danger"
+          *ngIf="
+            (formGroup.get('causesOfDeath')?.hasError('required') &&
+              formGroup.get('causesOfDeath')?.dirty) ||
+            (formInvalid && !this.formGroup.value.causesOfDeath)
+          "
+        >
+          *Causes Of Death is required
+        </div> -->
+        </div>
+
+        <button (click)="onSave()">Add <img src="assets/images/next-arrow.svg" /></button>
+      </form>
+    </aside>
+  </div>
+</div>
+
+<div class="ModalBox">
+  <div class="modal FullModal" id="MedicationModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="LoginArea">
+          <div class="LoginLeft">
+            <aside>
+              <figure><img src="assets/images/Medication.svg" /></figure>
+              <h3>Lorem Ipsum is simply</h3>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever.
+              </p>
+            </aside>
+          </div>
+
+          <div class="LoginRight MedicationSelect">
+            <aside>  
+                <form   [formGroup]="otpForm" action=""> 
+
+                    <div class="Search">
+                        <span><img src="assets/images/Search.svg" /></span>
+                        <input formControlName="searchText" (input)="onSearch()" type="text" class="form-control" placeholder="Search and Select {{selectedPara?.name}}">
+                    </div>            
+                    <div class="SelectBox">
+                        <label class="CheckBox" *ngFor="let item of subParameterList">{{item.name}}
+                            <input type="checkbox" (input)="onInputCheckChage(item)" [checked]="item.isSelected">
+                            <span class="Checkmark"></span>
+                        </label>
+
+                    </div>
+                    <button id="Medicateopen" (click)="onNextSubParameters()">Next <img src="assets/images/next-arrow.svg" /> </button>
+                </form>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

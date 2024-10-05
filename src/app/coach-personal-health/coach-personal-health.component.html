@@ -1,0 +1,41 @@
+<app-coach-header></app-coach-header>
+
+<div class="PeopleHealthArea PersonalHealth">  
+    <div class="PeopleHealthBox">
+        <div class="PeopleHealthLeft">
+            <figure>
+                <img src="{{userDetails?.friendDetails?.profilePic}}">
+            </figure>
+            <figcaption>
+                <h5>{{userDetails?.friendDetails?.firstName}} {{userDetails?.friendDetails?.lastName}}</h5>
+                <h6><i class="fa fa-phone"></i> {{userDetails?.friendDetails?.mobileNumber}}</h6>
+                <p>{{userDetails?.group?.name}}</p>
+                <!-- <a class="view" href="coach-personal-health.html">View all</a> -->
+            </figcaption>
+        </div>
+        <div class="PeopleHealthRight">
+            <ul>
+                <li *ngFor="let item of userDetails?.parameters">
+                    <div class="HeartRate">
+                        <h3>{{item?.parameters?.name}}</h3>
+                        <div class="HeartRateBox">
+                            <h4>{{item?.diffrence}}</h4>
+                            <article>
+                                <aside>
+                                    <p>Today</p>
+                                    <span>{{item?.todayShow}}</span>
+                                </aside>
+                                <aside>
+                                    <p>Average</p>
+                                    <span>{{item?.monthShow}}</span>
+                                </aside>
+                            </article>
+                        </div>
+                    </div>
+                </li>
+                
+              
+            </ul>
+        </div>
+    </div> 
+</div>

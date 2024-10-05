@@ -1,0 +1,243 @@
+	<div class="NavHeader">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg ">
+                <a class="navbar-brand" href="#"><img src="assets/images/Logo.svg"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="Menu">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" (click)="scroll('Pillar')">Our Pillars</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" (click)="scroll('Works')"> How it works</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" (click)="scroll('Support')">Support</a>
+                        </li> 
+                    </ul>
+ 
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link Login" [routerLink]="['/coach-login']">
+                                Coach view
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link Login" [routerLink]="['/login']">Login / Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <section>
+        <div class="HealthArea">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="HealthLeft">
+                            <h3>Partners In Your Health</h3>
+
+                            <p>Eternal life is the ultimate quest of mankind.  Helping you live longer and to live better is the goal of Cordato.</p>
+
+                            <p>Health Technology that focuses on prevention, with impressive insights, doctors, an app, tools & guides.</p>
+                        
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="assets/images/Download-1.png">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="assets/images/Download-2.png">
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="HealthIcon">
+                                <span class="Icon"><img src="assets/images/Health-1.svg"></span>
+                                <span class="Icon"><img src="assets/images/Health-2.svg"></span>
+                                <span class="Icon"><img src="assets/images/Health-3.svg"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="HealthRight">
+                            <ng-lottie [options]="options2" (animationCreated)="animationCreated($event)"></ng-lottie>
+                        </div>
+
+                        <!-- <div class="HealthRight">
+                            <ng-lottie [options]="options3" (animationCreated)="animationCreated($event)"></ng-lottie>
+                        </div>
+
+                        <div class="HealthRight">
+                            <ng-lottie [options]="options4" (animationCreated)="animationCreated($event)"></ng-lottie>
+                        </div>
+
+                        <div class="HealthRight">
+                            <ng-lottie [options]="options5" (animationCreated)="animationCreated($event)"></ng-lottie>
+                        </div> -->
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="PillarsArea" id="Pillar">
+            <div class="container">
+                <h2>Our Three Pillars</h2>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="PillarsBox">
+                            <h4>Making Medicare For All a Reality</h4>
+                            <p>A Survey a day keeps the doctor away.  No really, it does.  Don’t want to, or can’t, pay for Healthcare and/or Medication?  Well then don’t! We offer a solution.  Ad supported Healthcare.  We do it for Music and Games, Why not our most basic need, our Health?</p>
+                            <a href="javascript:void(0);">
+                                Learn More <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="PillarsBox">
+                            <h4>Healthcare Mental Health Health Insights</h4>
+                            <p>Cordato realizes the vision of Connected health to bring personalized medicine to you.  Rest assured, whether it be healthcare or mental health, we are here for you, when you need us most.</p>
+                            <a href="javascript:void(0);">
+                                Learn More <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="PillarsBox">
+                            <h4>All-In Technology with Cordato</h4>
+                            <p>Nutrigenomics, Artificial Intelligence, Pharmacogenomics …yup all that too.  Is the medicine you’re taking, or about to take, the best medicine for you?  What foods really do help you, personally, lose weight?  Finding ways to make you healthy quicker and live longer, better.  That’s Cordato</p>
+                            <a href="javascript:void(0);">
+                                Learn More <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="RebornArea" id="Works">
+            <div class="container">
+                <div class="row"> 
+                    <div class="col-sm-6">
+                        <div class="RebornLeft">
+                            <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 ">
+                        <div class="RebornRight">
+                            <h2>In 5 minutes have your health reborn</h2>
+                            <ul>
+                                <li>
+                                    <span class="Count">1</span>
+                                    <h4>Build an account</h4>
+                                    <p>Enter your name, email and medical questionnaire for the account and select a subscription plan.</p>
+                                </li>
+                                <li>
+                                    <span class="Count">2</span>
+                                    <h4>Install the Cordato App</h4>
+                                    <p>Be it a scale, a watch, a phone or any other connected device, doctors use the Cordato App to track your vitals using your devices.</p>
+                                </li>
+                                <li>
+                                    <span class="Count">3</span>
+                                    <h4>Us + You = Cordato</h4>
+                                    <p>We take what you tell us about you, and we combine it with your data, enabling us to make your health unique to you by understanding what makes you, you</p>
+                                </li>
+                            </ul> 
+
+                            <a [routerLink]="['/register-setpassword']"class="Signup">Sign up now</a>
+
+                        </div>
+                    </div>
+
+                     
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="DownloadArea">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h3>Get the app and change your life today</h3>
+                    </div>
+                    <div class="col-sm-5">
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <img src="assets/images/Download-3.png">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <img src="assets/images/Download-4.png">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="Footer" id="Support">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="FooterLeft">
+                            <p>Contact Us : <a href="mailto:info@cordato.com">info@cordato.com</a></p>  
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="FooterMiddle">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="assets/images/Social-1.svg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="assets/images/Social-2.svg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <img src="assets/images/Social-3.svg">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="FooterRight">
+                            <p>Support : <a href="javascript:void(0);">support@cordato.com</a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>

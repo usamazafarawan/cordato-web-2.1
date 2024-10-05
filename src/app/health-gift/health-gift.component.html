@@ -1,0 +1,96 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Subscription</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Give the Gift of Health</a></li>
+            </ul>
+        </div>
+
+        <div class="PlanArea">
+            <div class="PlanBox" *ngFor="let sub of subscriptionList">
+                <div class="PlanHead">
+                    <h4>{{sub.name}}</h4>
+                    <!-- <h3>${{sub.monthlyPaid}} <span>user/month</span></h3> -->
+                </div>
+                <ul>
+                    <li *ngIf="sub.accessOtherDash">Access to your family Dashboard</li>
+                    <li *ngIf="sub.healthDashboard">Health Dashboard</li>
+                    <li *ngIf="sub.virtualDoc">Virtual Doc</li>
+
+                    <li *ngIf="sub.mentalHealth">Mental Health</li>
+                    <!-- <li *ngIf="sub.counseling">Counseling</li>
+                    <li *ngIf="sub.psychiatric">Psychiatric</li> -->
+
+                    <li *ngIf="sub.analaytics">Analytics</li>
+                    <li *ngIf="sub.checkin">Check-In</li>
+                    <li *ngIf="sub.earnRewards">Earn Rewards</li>
+                    <li *ngIf="sub.healthAlert">Predictive Health Monitoring and Alerting</li>
+                </ul>
+
+                <p *ngIf="sub.yearlyCost!=0">
+                    <a  (click)="onPayPoint(sub)" href="javascript:void(0);" class="Start" >
+                        Pay with Point
+                    </a>
+                </p>
+
+                <button (click)="onPayment(sub)"  class="Start" >Paid ${{sub.yearlyCost}}/{{sub.interval_count<2?'':sub.interval_count}}{{' '}}{{sub.interval?sub.interval:'year'}}</button>
+            </div> 
+        </div> 
+
+        <!-- <div class="SubscriptionButton"> 
+            <a class="Button" [routerLink]="['/manage-account-genrate']">Genrate Sub Plan Code</a>
+        </div> -->
+
+    </div>
+</div>
+ 
+<div class="ModalBox">
+    <div class="modal" id="PlanModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="Category">
+                    <a class="CloseModal" data-dismiss="modal" href="JavaScript:Void(0);">×</a>
+                    <h3>Add Coupon</h3> 
+                    <form [formGroup]="formGroup">
+                        <div class="row"> 
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Plan</label>
+                                    <select formControlName="rewardsSubId"  class="form-control">
+                                        <option>Select Plan</option>
+                                        <option *ngFor="let item of planData" value="{{item._id}}" >{{item.plan}} Month</option>
+                                    </select>
+                                </div>
+                                <div class="text-danger"
+                                *ngIf="(formGroup.get('rewardsSubId')?.hasError('required') && (formGroup.get('rewardsSubId')?.dirty))|| (formInvalid && !this.formGroup.value.rewardsSubId)">
+                                *Plan is required
+                           </div>
+                            </div>
+        
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Required Rewards</label>
+                                    <input readonly type="text"  class="form-control" placeholder="" value="{{getValue()}}"> 
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button class="Button" (click)="onSubmit()">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

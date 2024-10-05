@@ -1,0 +1,383 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper"> 
+
+        <div class="SelectedDevice">
+            <p>Please Select Device</p>
+            <select (change)="deviceSelect($event)" [ngModel]="this.appointmentRelmemData?.group?.platform">
+                <option value="">Select Device</option>
+                <option value="android">Android</option>
+                <option value="iOS">iOS</option>
+            </select>
+        </div>
+        <div class="vitals-section container-fluid">
+        <span class="d-flex justify-content-center vital-title">Vitals</span>
+        <div class="row ">
+            <div class="col-sm-3">
+                <div class="DashboardGraph">
+                    <h4>Heart Rate</h4>
+                    <aside  class="d-flex flex-row justify-content-start">
+                        <div>
+                            <h5 *ngIf="!pulseGraphData?.currentValue">--</h5>
+                            <h5>{{pulseGraphData?.currentValue}}</h5>
+                            <!-- <p>5,000</p> -->
+                        </div>
+                        <div *ngIf="pulseGraphData?.diffrenceValue" class="rectangle d-flex flex-row mt-1 ">
+                            <img src="../../assets/images/triangle.png">
+                            <h6>{{pulseGraphData?.diffrenceValue | number:'1.2-2'}}%</h6>
+                        </div>
+                    </aside>
+                    <article>
+                        <canvas baseChart 
+                            [datasets]="barChartDataPulse"
+                            [labels]="barChartLabelsPulse"
+                            [options]="barChartOptionsPulse"
+                            [colors]="barChartColorsPulse"
+                            [plugins]="barChartPluginsPulse"
+                            [legend]="barChartLegendPulse"
+                            [chartType]="barChartTypePulse">
+                        </canvas>
+                        <div class="GraphLabel">
+                            <span *ngFor="let x of barChartLabelsPulseData">
+                                 {{x}} 
+                            </span>
+                        </div>
+                    </article>
+                </div>
+            </div> 
+            <div class="col-sm-3">
+                <div class="DashboardGraph">
+                    <h4>SPO2</h4>
+                    <!-- <aside>
+                
+                        <div>
+                            <h5>{{temperatureGraphData?.currentValue}}</h5>
+                            <p>5,000</p>
+                        </div>
+                        <div class="rectangle d-flex flex-row ">
+                            <img src="../../assets/images/triangle.png">
+                            <h6>30%</h6>
+                        </div>
+                    </aside> 
+                    <canvas baseChart 
+                        [datasets]="barChartDataTemperature"
+                        [labels]="barChartLabelsTemperature"
+                        [options]="barChartOptionsTemperature"
+                        [colors]="barChartColorsTemperature"
+                        [plugins]="barChartPluginsTemperature"
+                        [legend]="barChartLegendTemperature"
+                        [chartType]="barChartTypeTemperature">
+                    </canvas> -->
+                    <aside  class="d-flex flex-row justify-content-start">
+                    
+                        <div>
+                            <h5 *ngIf="!spo2Chart?.graph[0]?.syncValues">--</h5>
+                            <h5 *ngIf="spo2Chart?.graph[0]?.syncValues">{{spo2Chart?.graph[0]?.syncValues | number : '1.2-2' }}</h5>
+                            <!-- <p>5,000</p> -->
+                        </div>
+                        <div *ngIf="spo2Chart?.diffrenceValue" class="rectangle d-flex flex-row mt-1 ">
+                            <img src="../../assets/images/triangle.png">
+                            <h6>{{spo2Chart?.diffrenceValue | number:'1.2-2'}}%</h6>
+                        </div>
+                    </aside>
+                    <article>
+                    
+                        <canvas baseChart   [datasets]="barChartDataSPO2"
+                        [labels]="barChartLabelsTemperature"
+                            [options]="barChartOptionsTemperature" [colors]="barChartColorsTemperature"
+                            [plugins]="barChartPluginsTemperature" [legend]="barChartLegendTemperature"
+                            [chartType]="barChartTypeTemperature">
+                            <!-- {{spo2Chart?.graphData}} -->
+                    
+                        </canvas>
+                        <div class="GraphLabel">
+                            <span *ngFor="let x of spo2Chart?.graph">
+                                {{x?.time}}
+                            </span>
+                        </div>
+                    </article>
+                </div>
+            </div> 
+            <div class="col-sm-3">
+                <div class="DashboardGraph">
+                    <h4>Respiration Rate</h4>
+                    <aside  class="d-flex flex-row justify-content-start">
+                        <!-- <h5>Current : {{respirationRateGraphData?.currentValue}}</h5>
+                        <p>5,000</p> -->
+                        <div>
+                            <h5 *ngIf="!respirationRateGraphData?.currentValue">--</h5>
+                            <h5> {{respirationRateGraphData?.currentValue}}</h5>
+                            <!-- <p>5,000</p> -->
+                        </div>
+                        <div  *ngIf="respirationRateGraphData?.diffrenceValue" class="rectangle d-flex flex-row mt-1">
+                            <img src="../../assets/images/triangle.png">
+                            <h6>{{respirationRateGraphData?.diffrenceValue | number:'1.2-2'}}%</h6>
+                        </div>
+                    </aside> 
+                    
+                    <article>
+                        <canvas baseChart 
+                            [datasets]="barChartDataRespiration"
+                            [labels]="barChartLabelsRespiration"
+                            [options]="barChartOptionsRespiration"
+                            [colors]="barChartColorsRespiration"
+                            [plugins]="barChartPluginsRespiration"
+                            [legend]="barChartLegendRespiration"
+                            [chartType]="barChartTypeRespiration">
+                    </canvas>
+                        <div class="GraphLabel">
+                            <span *ngFor="let x of barChartLabelsRespirationData">
+                                 {{x}} 
+                            </span>
+                        </div>
+                    </article>
+                    
+                </div>
+            </div> 
+            <div class="col-sm-3">
+                <div class="DashboardGraph">
+                    <h4>Blood Pressure</h4>
+                    <aside  class="d-flex flex-row justify-content-start">
+                        <!-- <h5>Current : {{bloodPressureGraphData?.graph1?.currentValue1}}</h5>
+                        <h5>Current : {{bloodPressureGraphData?.graph2?.currentValue1}}</h5>  -->
+                        <div>
+                            <h5> {{bloodPressureGraphData?.graph1?.currentValue1}} / {{bloodPressureGraphData?.graph2?.currentValue1}}</h5>
+                            <!-- <p>5,000</p> -->
+                        </div>
+                        <div *ngIf="bloodPressureGraphData?.diffrenceValue" class="rectangle d-flex flex-row mt-1">
+                            <img src="../../assets/images/triangle.png">
+                            <h6>{{bloodPressureGraphData?.diffrenceValue | number:'1.2-2'}}%</h6>
+                        </div>
+                    </aside> 
+                    <article>
+
+                    <canvas baseChart 
+                        [datasets]="barChartDataBlood"
+                        [labels]="barChartLabelsBlood"
+                        [options]="barChartOptionsBlood"
+                        [colors]="barChartColorsBlood"
+                        [plugins]="barChartPluginsBlood"
+                        [legend]="barChartLegendBlood"
+                        [chartType]="barChartTypeBlood">
+                    </canvas>
+                    <div class="GraphLabel">
+                        <span *ngFor="let x of bloodPressureGraphData?.graph1?.graph">
+                             {{x?.time}} 
+                        </span>
+                    </div>
+                    </article>
+                </div>
+            </div> 
+        </div>
+</div>
+        <div class="row">
+            <div class="col-sm-6 Measurement-Table-Main MeasurementTable">
+                    <span class="d-flex justify-content-center MeasurementTable-title">Apple Watch Dashboard</span>
+                    <!-- <div class="MeasurementOption container">
+                        <button (click)="openMeasurement()">Select Option</button>
+                        <ul *ngIf="MeasurementShow">
+                            <li *ngFor="let x of deviceBaseData">
+                                <p>{{x.name}}</p>
+                    
+                                <label class="Switch">
+                                    <input type="checkbox" (click)="deviceGroupId(x)" type="checkbox" [checked]="x?.selectedGroup?.isSelected">
+                                    <span class="slider"></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div> -->
+              
+                    
+                    <table > 
+                        <thead>
+                            <tr>
+                                <th>Measurement</th>
+                                <th>Current</th>
+                                <th>Today</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="measurement-table-row" *ngFor="let x of appointmentRelmemData.parameters;let i=index">
+                                <td>{{x.parameters.name}}</td>
+                                <td>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <strong class="table-strong" *ngIf="!x?.graph[0]?.syncValues">--</strong>
+                                        <strong class="table-strong" *ngIf="x?.graph[0]?.syncValues">{{x?.graph[0]?.syncValues | number : '1.2-2' }}</strong>
+                                        <div *ngIf="x?.diffrenceValue" class="rectangle d-flex flex-row justify-content-center ">
+                                            <img src="../../assets/images/triangle.png">
+                                            <h6>{{x?.diffrenceValue | number:'1.2-2' }}%</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td> 
+                              
+                                    <div *ngIf="x.graph.length>=1">
+                                        <span class="Blank"></span>
+                                        <div class="DashboardGraph today-chart">
+                                    <article>
+                                        <canvas baseChart 
+                                        [data]="x.graphData"
+                                            [labels]="barChartLabelsMeasurement"
+                                            [options]="barChartOptionsMeasurement"
+                                            [colors]="barChartColorsMeasurement"
+                                            [plugins]="barChartPluginsMeasurement"
+                                            [legend]="barChartLegendMeasurement"
+                                            [chartType]="barChartTypeMeasurement">
+                                            {{x.graphData}}
+                                    
+                                        </canvas>  
+                                        <div class="GraphLabel measurement-chart">
+                                            <span *ngFor="let graph of x?.graph">
+                                                 {{graph?.time}} 
+                                            </span>
+                                        </div>
+                                    </article>
+                                </div>
+                                    </div>
+                                </td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                    <!-- <div class="container">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            Measurement                          </div>
+                          <div class="col-sm-2">
+                            Current                          </div>
+                          <div class="col-sm-6">
+                            Today                          </div>
+                        </div>
+
+                    
+                        <div class="row align-items-start"  *ngFor="let x of appointmentRelmemData.parameters;let i=index">
+                            <div class=" col col-sm-4">
+                                {{x.parameters.name}}                            </div>
+                            <div class=" col col-sm-2">
+                                <strong *ngIf="!x?.graph[0]?.syncValues">--</strong>
+                                <strong *ngIf="x?.graph[0]?.syncValues">{{x?.graph[0]?.syncValues | number : '1.2-2' }}</strong>
+                                <div class="rectangle d-flex flex-row ">
+                                    <img src="../../assets/images/triangle.png">
+                                    <h6>30%</h6>
+                                </div>                            </div>
+                            <div class="col col-sm-6">
+                                <div *ngIf="x.graph.length>=1">
+                                    <span class="Blank"></span>
+                                    <div class="DashboardGraph today-chart">
+                                <article>
+                                    <canvas baseChart 
+                                    [data]="x.graphData"
+                                        [labels]="barChartLabelsMeasurement"
+                                        [options]="barChartOptionsMeasurement"
+                                        [colors]="barChartColorsMeasurement"
+                                        [plugins]="barChartPluginsMeasurement"
+                                        [legend]="barChartLegendMeasurement"
+                                        [chartType]="barChartTypeMeasurement">
+                                        {{x.graphData}}
+                                
+                                    </canvas>  
+                                    <div class="GraphLabel">
+                                        <span *ngFor="let x of barChartLabelsRespirationData">
+                                             {{x}} 
+                                        </span>
+                                    </div>
+                                </article>
+                            </div>
+                                </div>                            </div>
+                          </div>
+
+                      </div> -->
+            </div>
+            <div class="col-sm-2">
+                <div class="HealthWarning">
+                    <!-- <p>No Warning</p> -->
+                    <img src="assets/images/Health-r.png">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="AnalysisBox analysis">
+                    <h5>Check-In-Analysis</h5>
+                    <select (change)="questionChange($event)" class="form-select " aria-label="Default select example">
+                        <option>Select Option</option> 
+                        <option value="{{x._id}}" *ngFor="let x of questionList">{{x.question}}</option>
+                    </select>
+                    <!--Cough Part -->
+                    <div class="cough-part" *ngIf="selectedQuestion && selectedQuestion.isQuestionNumberType == 'yes'">
+                        <div class="card mt-3  first-card">
+                            <div class="card-body d-flex flex-column  align-items-center">
+                                <h3> {{average | number:'1.1-1'}} </h3>
+                                <p> Average </p>
+                            </div>
+                        </div>
+                        <div class=" mt-1 d-flex flex-row justify-content-around ">
+                            <div class="card mt-3  second-card">
+                                <div class="card-text d-flex flex-column  align-items-center  justify-content-center mt-3">
+                                    <p>Minimum</p>
+                                    <span class="mt-1 fw-bold">{{min| number:'1.1-1'}} </span>
+                                </div>           
+                            </div>
+                            <div class="card mt-3  third-card">
+                                <div class="card-text d-flex flex-column  align-items-center  justify-content-center mt-3">
+                                    <p>Sts Deviation</p>
+                                    <span class="mt-1 fw-bold">{{stdDeviation| number:'1.1-1'}}</span>
+                                </div>
+                            </div>
+                            <div class="card mt-3  fourth-card">
+                                <div class="card-text d-flex flex-column  align-items-center  justify-content-center mt-3">
+                                    <p>Maximum</p>
+                                    <span class="mt-1 fw-bold">{{max| number:'1.1-1'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Button Group  Part -->
+                    <div class="mt-3" *ngIf="selectedQuestion">
+                        <div class="btn-group  w-100  button-selection" role="group" aria-label="Basic example">
+                            <button type="button" (click)="buttonSelection('day')"  class="btn btn-secondary" [ngClass]="checkInAnalysisButton.day">D</button>
+                            <button type="button" (click)="buttonSelection('week')"  class="btn btn-secondary" [ngClass]="checkInAnalysisButton.week">W</button>
+                            <button type="button" (click)="buttonSelection('month')"  class="btn btn-secondary" [ngClass]="checkInAnalysisButton.month">M</button>
+                            <button type="button" (click)="buttonSelection('year')"  class="btn btn-secondary" [ngClass]="checkInAnalysisButton.year">Y</button>
+                        </div>
+                    </div>
+                    <!--First Chart Part -->
+                    <div class="mt-3 chart-first" *ngIf="selectedQuestion && selectedQuestion.isQuestionNumberType == 'yes' && selectedQuestionTime.length  ">
+                        <article>
+                            <canvas baseChart [datasets]="barChartQuestions" [labels]="barChartLabelsQuestions"
+                                [options]="barChartOptionsQuestions" [colors]="barChartColorsQuestions" [plugins]="barChartPluginsQuestions"
+                                [legend]="barChartLegendQuestions" [chartType]="barChartTypeQuestions">
+                            </canvas>
+                            <div class="GraphLabel">
+                                <span *ngFor="let x of barChartLegedsQuestions">
+                                    {{x}}
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+                    <div  class="mt-3 d-flex justify-content-center" style="font-size: 14px; color: #fff;" *ngIf="selectedQuestion  && !selectedQuestionTime.length ">
+                        <span>No Record Found</span>
+                    </div>
+                     <!--Second Chart Part -->
+                     <div class="mt-3 chart-first" *ngIf="selectedQuestion && selectedQuestion.isQuestionNumberType == 'no' && selectedQuestionTime.length " >
+                        <article>
+                            <canvas height="300" baseChart [datasets]="overallHealthChart" [labels]="overallHealthChartLabels"
+                                [options]="chartOptions" [colors]="overallHealthChartColors" [plugins]="chartPlugins"
+                                [legend]="overallHealthChartLegend" [chartType]="overallHealthChartType">
+                            </canvas>
+                        </article>
+                        <div class="container mt-2">
+                            <div class="row">
+                              <div class="col data" *ngFor="let legend of  legendsEmoji">
+                                    <div class="ml-1 mt-2" style="height: 5px; width: 25px;" [style.backgroundColor]="legend?.color">
+                                        <span style="visibility: hidden;">label</span>
+                                    </div>
+                                    <img class="ml-1 mb-1" src="{{legend?.imgPath}}" style="height: 20px; width: 20px;">
+                                 </div>
+                            </div>
+                    </div>
+                </div>
+    </div>
+</div>
+</div>
+</div>
+</div>

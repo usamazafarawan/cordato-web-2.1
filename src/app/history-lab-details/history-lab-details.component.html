@@ -1,0 +1,251 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>CMP14+CBC/D/PLT+TSH - Details</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a [routerLink]="['/manage-account']">Manage My Account</a></li>
+                <li><a [routerLink]="['/history-lab']">Lab History</a></li>
+                <li><a href="javascript:void(0);">CMP14+CBC/D/PLT+TSH - Details</a></li>
+            </ul>
+        </div> 
+        
+        <div class="RewardsArea">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#Details">Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#Results">Past Results</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#Graph">Graph of Past Results</a>
+                </li>
+            </ul>
+            
+            <div class="tab-content">
+                <div class="tab-pane active" id="Details">
+
+                    <div class="Significant">
+                        <h3>Comment from the Doctor's Office</h3>
+                        <p>No significant abnormalities</p>
+
+                        <aside>
+                            <h4>Component Result</h4>
+                            <div>
+                                <img src="assets/images/pdf.svg" alt="">test_report.pdf
+                            
+                                <a href="javascript:void(0);">Download</a>
+                            </div>
+                        </aside> 
+                    </div>
+
+                    <div class="CommonArea">
+                        <div class="TableList LabTable">  
+                            <table class="table">
+                                <tr> 
+                                    <th>Component</th>
+                                    <th>Your Value</th> 
+                                    <th>Standard Range</th> 
+                                </tr>
+                                <tr> 
+                                    <td>Glucose, Serum</td>
+                                    <td><strong>89</strong> mg/dl</td>
+                                    <td><i>65 - 99 mg/dL</i></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>Bun</td>
+                                    <td><strong>13</strong> mg/dl</td>
+                                    <td><i>6 - 24 mg/dL</i></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>Creatinine, Serum</td>
+                                    <td><strong>0.95</strong> mg/dl</td>
+                                    <td><i>0.76 - 1.27 mg/dL</i></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>EGFR if Nonafricn AM</td>
+                                    <td><strong>97</strong> mL/min/1.73</td>
+                                    <td><i>>59 mL/min/1.73</i></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>EGFR if Africn AM</td>
+                                    <td><strong>112</strong> mL/min/1.73</td>
+                                    <td><i>>59 mL/min/1.73</i></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>Bun/Creatinine Ratio</td>
+                                    <td><strong>14</strong></td>
+                                    <td><i>9 - 20</i></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>Sodium, Serum</td>
+                                    <td><strong>141</strong> mmol/L</td>
+                                    <td><i>134 - 144 mmol/L</i></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>Potassium, Serum</td>
+                                    <td><strong>4.1</strong> mmol/L</td>
+                                    <td><i>3.5 - 5.2 mmol/L</i></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>Chloride, Serum</td>
+                                    <td><strong>104</strong> mmol/L</td>
+                                    <td><i>96 - 106 mmol/L</i></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>Carbon Dioxide, Total</td>
+                                    <td><strong>24</strong> mmol/L</td>
+                                    <td><i>20 - 29 mmol/L</i></td> 
+                                </tr> 
+                            </table>
+                                
+                        </div>
+                    </div> 
+                </div>
+                <div class="tab-pane fade" id="Results">
+                    <div class="Significant">
+                        <div class="FilterBox">
+                            <div class="form-group">
+                                <label>From Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>To Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button>Apply</button>
+                            </div>
+                        </div>
+
+                        <aside>
+                            <h4>&nbsp;</h4>
+                            <div>
+                                <img src="assets/images/pdf.svg" alt="">test_report.pdf
+                            
+                                <a href="javascript:void(0);">Download</a>
+                            </div>
+                        </aside> 
+                    </div>
+
+                    <div class="CommonArea">
+                        <div class="TableList LabTable">  
+                            <table class="table">
+                                <tr> 
+                                    <th><strong>Name - </strong>Standard Range</th>
+                                    <th>27/05/2020</th> 
+                                    <th>15/10/2020</th> 
+                                    <th>21/12/2020</th> 
+                                </tr>
+                                <tr> 
+                                    <td>
+                                        <strong>Cholesterol, Total</strong> <br>
+                                        100 - 199 mg/dl
+                                    </td>
+                                    <td><strong>188</strong></td> 
+                                    <td><strong>197</strong></td> 
+                                    <td><strong>190</strong></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>
+                                        <strong>HDL Cholrsterol</strong> <br>
+                                        >39 mg/dl
+                                    </td>
+                                    <td><strong>39 L</strong></td> 
+                                    <td><strong>36 L</strong></td> 
+                                    <td><strong>40</strong></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>
+                                        <strong>LDL CHOL CALC (NIH)</strong> <br>
+                                        0 - 99 mg/dl
+                                    </td>
+                                    <td><strong>105 H</strong></td> 
+                                    <td><strong>131 H</strong></td> 
+                                    <td><strong>128 H</strong></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>
+                                        <strong>Triglycerides</strong> <br>
+                                        0 - 149 mg/dl
+                                    </td>
+                                    <td><strong>218 H</strong></td> 
+                                    <td><strong>151 H</strong></td> 
+                                    <td><strong>124</strong></td> 
+                                </tr> 
+                                <tr> 
+                                    <td>
+                                        <strong>VLDL Cholesterol CAL</strong> <br>
+                                        5 - 40 mg/dl
+                                    </td>
+                                    <td><strong></strong></td> 
+                                    <td><strong></strong></td> 
+                                    <td><strong>22</strong></td> 
+                                </tr>   
+                            </table>
+                                
+                        </div>
+                    </div> 
+                </div>
+                <div class="tab-pane fade" id="Graph">
+                    <div class="Significant">
+                        <div class="FilterBox">
+                            <div class="form-group">
+                                <label>From Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>To Date</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button>Apply</button>
+                            </div>
+                        </div>
+
+                        <aside>
+                            <h4>&nbsp;</h4>
+                            <div>
+                                <img src="assets/images/pdf.svg" alt="">test_report.pdf
+                            
+                                <a href="javascript:void(0);">Download</a>
+                            </div>
+                        </aside> 
+                    </div>
+
+                    <div class="CommonArea">
+                        <!-- <img src="assets/images/graph.PNG" alt=""> -->
+                     <!-- <apx-chart
+                              [series]="chartOptions.series"
+                              [chart]="chartOptions.chart"
+                              [xaxis]="chartOptions.xaxis"
+                              [stroke]="chartOptions.stroke"
+                              [tooltip]="chartOptions.tooltip"
+                              [dataLabels]="chartOptions.dataLabels"
+                              [legend]="chartOptions.legend"
+                              [markers]="chartOptions.markers"
+                              [grid]="chartOptions.grid"
+                              [yaxis]="chartOptions.yaxis"
+                              [title]="chartOptions.title"
+                            ></apx-chart> -->
+                        <apx-chart
+                        [series]="chartOptions.series"
+                        [chart]="chartOptions.chart"
+                        [xaxis]="chartOptions.xaxis"
+                        [title]="chartOptions.title"
+                      ></apx-chart>
+
+                    </div> 
+                </div>
+            </div>  
+        </div>  
+    </div>
+</div>

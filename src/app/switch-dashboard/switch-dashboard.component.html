@@ -1,0 +1,95 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>All Sessions</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Sessions</a></li>
+            </ul>
+        </div>
+
+        <div class="Welcome">
+            <!-- <a href="javascript:void(0);" class="Sync" data-toggle="modal" data-target="#Congratulation"><i class="fa fa-refresh"></i> Sync your health data</a> -->
+            <h4>Switch User Dashboard</h4>
+            <h3>{{userData?.firstName}} {{userData?.lastName}}</h3>
+            <p>We would like to take this opportunity to welcome you to our practice and to thank you for choosing our physicians to participate in your healthcare. We look forward to providing you with personalized, comprehensive health care focusing on wellness and prevention. </p>
+        </div>
+        <div class="ButtonBox">
+            <!-- <button class="{{platform=='android'?'active':''}}" (click)="onselectPlatform('android')">Android</button> -->
+            <button class="" >{{groupData?.group?.groupsDetails?.name}}</button>
+            <p>Last sync time: {{groupData?.group?.lastSyncTime}}</p>
+        </div>
+        <div class="DashboardArea" *ngIf="groupData && groupData.parameters && groupData.parameters.length "> 
+            <div  *ngFor="let data of groupData.parameters;let i=index" class="DashboardCount" [ngStyle]="{'background-color':data.colorCode }">
+                <a [routerLink]="['/switch-session-details']" [queryParams]="{userId:userId, parameterId:data.groupParameterId,groupId:data.groupId}">
+                    <h4>{{data?.parameters?.name}}</h4>
+                  <!--   <h3 *ngIf="data.syncDataLast">
+                        {{data?.syncDataLast?.value}}/{{data?.syncDataLast?.unit}}
+                    </h3> -->
+                    <h5>{{data?.diffrence}}</h5>
+                    <article>
+                        <aside>
+                            <p>Today</p>
+                            <span>{{data?.todayShow}}</span>
+                        </aside>
+                        <aside>    
+                            <p>Monthly Avearage</p>
+                            <span>{{data?.monthShow}}</span>
+                        </aside>
+                    </article>
+                </a>
+            </div>
+        </div>
+        
+        <div class="Appstore">
+            <h4>Download the app Google play, app store to synchronize  your vitals through default health app.</h4>
+            <aside>
+                <a href="javascript:void(0);"><img src="assets/images/Store-1.svg"></a>
+                <a href="javascript:void(0);"><img src="assets/images/Store-2.svg"></a>
+            </aside>
+        </div>
+    </div>
+</div>
+
+
+<div class="ModalBox">
+    <div class="modal ModalCenter" id="Congratulation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="SynchronizeBox">
+                    <figure>
+                        <img src="assets/images/Heart.svg">
+                    </figure>
+                    <h3>Apple Health</h3>
+                     <p><strong>"Health Care"</strong> would like to access apple heath </p> 
+                    <button data-dismiss="modal" data-toggle="modal" data-target="#AllowModal">Allow</button>
+                    <h6><a href="javascript:void(0);" data-dismiss="modal">Deny</a> </h6>
+
+                </div> 
+            </div>
+        </div>
+    </div> 
+    
+    <div class="modal ModalCenter" id="AllowModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="SynchronizeBox">
+                    <h3>Successfully Synced !</h3>
+                    <figure>
+                        <img src="assets/images/Heart.svg" width="90px">
+                        <img src="assets/images/arrow-active.svg" width="80px">
+                        <img src="assets/images/Circle.svg" width="90px">
+                    </figure>
+                    <p>Your health app data will be shown to doctor<br> to give you better care ! </p>
+                    <button data-dismiss="modal">ok</button> 
+                </div> 
+            </div>
+        </div>
+    </div> 
+
+</div>

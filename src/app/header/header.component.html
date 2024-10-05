@@ -1,0 +1,39 @@
+<div class="Header">
+    <div class="HeaderIcon">
+        <div class="Toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="welcomeName">
+            <h2 >Welcome <span>{{loginData?.firstName}} {{loginData?.lastName}}</span></h2>
+            <!-- <h2 >Welcome <span style="color: #1DA1F2;">{{loginData?.firstName}} {{loginData?.lastName}}</span></h2> -->
+        </div>
+    </div>
+    <div class="HeaderRight">
+        <!-- <ul>
+            <li>
+                <a [routerLink]="['/vaccination']">
+                    <img src="assets/images/Header-1.svg">
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/notification']">
+                    <img src="assets/images/Header-3.svg" width="20px">
+                </a>
+            </li>  
+            <li class="Profile">
+                <a [routerLink]="['/manage-account']">
+                    <img src="{{loginData.profilePic}}" width="30px">
+                </a>
+            </li>
+        </ul>  -->
+        <ul>
+            <li class="Chat">
+                <a href="javascript:void(0);">
+                    <img src="assets/images/Chat.png">
+                </a>
+            </li>
+        </ul> 
+    </div>
+</div>

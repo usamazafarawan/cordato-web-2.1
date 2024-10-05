@@ -1,0 +1,131 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Book Appointment</h5>
+            <!-- <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a [routerLink]="['/dashboard']">Home </a></li>
+                <li><a [routerLink]="['/appointment-book']">Book Appointment</a></li>
+                <li><a [routerLink]="['/appointment-book-mdication']">Medication</a></li>
+                <li><a [routerLink]="['/appointment-book-reason']">Reason for Visit</a></li>
+                <li><a [routerLink]="['/appointment-book-vitals']">Vitals</a></li> 
+                <li><a [routerLink]="['/appointment-book-doctor']">Select Doctor</a></li> 
+                <li><a [routerLink]="['/appointment-book-date']">date & Time</a></li> 
+            </ul> -->
+        </div> 
+         
+        <div class="CommonArea AppointmentBook">
+            <div class="CommonHead">
+                <figure>
+                    <img src="assets/images/calender-1.svg">
+                </figure>
+                <h5>Select Visit Date | Time</h5> 
+            </div>
+            
+            <div class="CommonBody">
+                <div class="CommonForm">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            
+                            <div class="CalenderLeft">
+                                <full-calendar [options]="calendarOptions"></full-calendar>    
+                            </div> 
+
+                        </div>
+                        <div class="col-sm-5"> 
+                            <div class="CalenderRight">
+                                <h6 *ngIf="selectDate">{{getDate()}}</h6>
+                                <div class="CalenderRightBox">
+                                    <label *ngFor="let slot of slotList" class="CheckBox" (click)="onSelectSlot(slot)"> {{slot.startCombine}}-{{slot.endCombine}}
+                                        <input type="radio" name="Time">
+                                        <span class="{{selectedSlot._id==slot._id?'Checkmark':'Checkmark'}} "></span>
+                                    </label> 
+                                </div>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+ 
+        </div> 
+         
+        <div class="CommonButon">
+            <button class="Button" (click)="onContinue()"> Continue <img src="assets/images/next-arrow.svg" /></button>
+        </div>
+    </div>
+</div>
+
+ 
+<div class="ModalBox">
+    <div class="modal" id="DetailsModal">
+        <div class="modal-dialog">
+            <div class="modal-content" *ngIf="appointmentDetails">
+                <div class="DoctorConsult">
+                    <div class="DoctorHead">
+                        <figure>
+                            <img src="{{appointmentDetails.selectDoctor.profilePic}}" alt="">
+                        </figure>
+                        <figcaption>
+                            <h3>{{appointmentDetails.selectDoctor.designation}} {{appointmentDetails.selectDoctor.firstName}} {{appointmentDetails.selectDoctor.lastName}}</h3>
+                            <h5>{{appointmentDetails.selectDoctor.department}}</h5>
+                            <p><i class="fa fa-star"></i> <strong>{{appointmentDetails.selectDoctor.avgRating}}</strong> <span>({{appointmentDetails.selectDoctor.reviewCount}} Feedback)</span></p>
+                        </figcaption>
+                    </div>
+
+                    <div class="DoctorBody">
+                        <aside>
+                            <h4>
+                                <img src="assets/images/calender.svg" alt="">
+                                Consult Time
+                            </h4>
+                            <h5>{{getDate()}}</h5>
+                            <h5>{{selectedSlot.startCombine}}-{{selectedSlot.endCombine}}</h5>
+                            <!-- <h5>Live chat consult : $45 / visit</h5> -->
+                        </aside>
+                        <aside>
+                            <!-- <h4>
+                                <img src="assets/images/chain.svg" alt="">
+                                <a href="javascript:void(0);">www.zoom.us/j/6456466466</a>
+                            </h4> -->
+                            <p>When it is time for your appointment Please follow the link provided and then be allowed into the visit</p>
+                        </aside>
+                    </div>
+
+                    <div class="DoctorFooter">
+                        <h5>A text message and email message with the appointment link will also be sent</h5>
+                        <p>*Please try to join the appointment a few minutes early if you are more than 5 minutes late
+                            to your appointment, your appointment will be canceled and you will forfeit your appointment
+                            fee. Please press CONFIRM now to agree with the conditions and the appointment time.
+                            Payment will be taken once appointment is confirmed Or Canceled to cancel it.
+                        </p>
+                    </div>
+
+                    <div class="DoctorButton">
+                        <button data-toggle="modal" (click)="onConfirm()">Confirm</button>
+                        <button data-dismiss="modal" >Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    
+    <div class="modal" id="Congratulation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="CongratulationBox">
+                    <figure style=" box-shadow: 0 2px 10px #ddd; border-radius: 28px;">
+                        <img src="{{appointmentDetails?.selectDoctor?.profilePic}}" alt="">
+                    </figure>
+                    <h3>Sent successful!</h3>
+                    <p> if you want to cancel or reschedule call <br> 1800-0303850</p>
+                    <a [routerLink]="['/appointment-upcoming']" data-dismiss="modal">ok</a>
+                </div> 
+            </div>
+        </div>
+    </div> 
+
+</div>

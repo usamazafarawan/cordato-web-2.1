@@ -1,0 +1,162 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <form [formGroup]="formGroup" class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Book Appointment</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a [routerLink]="['/dashboard']">Home </a></li>
+                <li><a [routerLink]="['/appointment-book']">Book Appointment</a></li>
+                <li><a [routerLink]="['/appointment-book-mdication']">Medication</a></li>
+                <li><a [routerLink]="['/appointment-book-reason']">Reason for Visit</a></li>
+                <li><a [routerLink]="['/appointment-book-vitals']">Vitals</a></li>
+            </ul>
+            <p>Step 4 of 5</p>
+        </div>
+
+        <div class="CommonArea AppointmentBook">
+            <div class="CommonHead">
+                <figure>
+                    <img src="assets/images/profile-1.svg">
+                </figure>
+                <h5>Check Your Vitals</h5>
+            </div>
+
+            <div class="CommonBody">
+                <div class="CommonForm">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">Height</label>
+                                <input formControlName="height" maxlength="5" type="text" class="form-control">
+                                <span class="Icon"><a href="javascript:void(0);">cm / inches</a></span>
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="(formGroup.get('height')?.hasError('required') && (formGroup.get('height')?.dirty))|| (formInvalid && !this.formGroup.value.height)">
+                                *Height is required
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">Weight</label>
+                                <input formControlName="weight" maxlength="5" type="text" class="form-control">
+                                <span class="Icon"><a href="javascript:void(0);">lbs / kg</a></span>
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="(formGroup.get('weight')?.hasError('required') && (formGroup.get('weight')?.dirty))|| (formInvalid && !this.formGroup.value.weight)">
+                                *Weight is required
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">Temprature</label>
+                                <input formControlName="temprature" maxlength="5" type="text" class="form-control">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="(formGroup.get('temprature')?.hasError('required') && (formGroup.get('temprature')?.dirty))|| (formInvalid && !this.formGroup.value.temprature)">
+                                *Temprature is required
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">Pulse</label>
+                                <input formControlName="pulse" maxlength="5" type="text" class="form-control">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="(formGroup.get('pulse')?.hasError('required') && (formGroup.get('pulse')?.dirty))|| (formInvalid && !this.formGroup.value.pulse)">
+                                *Pulse is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="CommonArea AppointmentBook">
+            <div class="CommonHead">
+                <figure>
+                    <img src="assets/images/chain.svg">
+                </figure>
+                <h5>Blood Pressure</h5>
+            </div>
+
+            <div class="CommonBody">
+                <div class="CommonForm">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">Systolic</label>
+                                <input formControlName="systolic" type="text" class="form-control">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="(formGroup.get('systolic')?.hasError('required') && (formGroup.get('systolic')?.dirty))|| (formInvalid && !this.formGroup.value.systolic)">
+                                *Systolic is required
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">Distolic</label>
+                                <input formControlName="distolic" type="text" class="form-control">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="(formGroup.get('distolic')?.hasError('required') && (formGroup.get('distolic')?.dirty))|| (formInvalid && !this.formGroup.value.distolic)">
+                                *Distolic is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="CommonArea AppointmentBook">
+            <div class="CommonForm">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="UploadReportLeft">
+                            <div class="Medication">
+                                <article>
+                                    <figure><img src="assets/images/ECG.svg" /></figure>
+                                    <h6>ECG</h6>
+                                    <p>Share Your ECG Report for Doctors.</p>
+                                </article>
+                            </div>
+
+                            <a href="javascript:void(0);" class="Upload">
+                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                Upload ECG Report
+                                <input  (change)="onFileChange($event)" type="file" name="" id="">
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div class="ECGReport">
+                            <img src="{{filepath}}">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div class="UploadReport">
+
+
+
+                        </div> 
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="CommonButon">
+            <button class="Button" (click)="onNext()"> Next <img src="assets/images/next-arrow.svg" /></button>
+        </div>
+
+
+    </form>
+</div>

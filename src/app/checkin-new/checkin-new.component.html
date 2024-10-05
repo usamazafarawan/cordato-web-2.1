@@ -1,0 +1,139 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="TosterError" *ngIf="tostarMsg">
+    <p><span><i class="fa fa-times"></i></span> Please Select Symptoms ?</p>
+</div>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="CheckinArea" *ngIf="!checkinOption"> 
+            <form [formGroup]="EmojiGroup" class="CheckEmoji">
+                <h3>How is your Health today ?</h3>
+                <div class="EmojiBox">
+                    <div class="EmojiFirst" *ngIf="EmojiFirst == true">
+                        <img src="assets/images/awful.svg" alt="">
+                    </div>
+                    <div class="EmojiSecond" *ngIf="EmojiSecond == true ">
+                        <img src="assets/images/bad.svg" alt="">
+                    </div>
+                    <div class="EmojiThierd" *ngIf="EmojiThierd == true ">
+                        <img src="assets/images/ok.svg" alt="">
+                    </div>
+                    <div class="EmojiFouth" *ngIf="EmojiFouth == true ">
+                        <img src="assets/images/good.svg" alt="">
+                    </div>
+                    <div class="EmojiFive" *ngIf="EmojiFive == true ">
+                        <img src="assets/images/great.svg" alt="">
+                    </div>
+                </div>
+
+                <ul>
+                    <li>
+                        <input value="awful" formControlName="answer" type="radio"  name="answer" (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                    <li>
+                        <input value="bad"  formControlName="answer" type="radio"  name="answer" (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                    <li>
+                        <input value="ok"  formControlName="answer" type="radio"  name="answer" (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                    <li>
+                        <input value="good"  formControlName="answer" type="radio"  name="answer" (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                    <li>
+                        <input value="great"  formControlName="answer" type="radio"  name="answer" checked (change)="Emoji($event)">
+                        <span></span>
+                    </li>
+                </ul>
+                <h6>I'm Feeling  {{EmojiGroup.value.answer}}</h6>
+            </form> 
+            <div class="CommonButon">
+                <button class="Button" (click)="CheckinHealth()">Save</button>
+            </div>
+        </div>  
+  
+        <div class="CheckinNewArea" *ngIf="checkinOption">
+            <div class="CheckinNewBody">
+                <div class="CheckinNewSeverity">
+                    <h3>{{appointmetmentList.question}}</h3>
+
+                    <div class="CheckinNewSeverityHead">
+                        <aside>    
+                            <ul>
+                                <li>
+                                    <input type="radio" name="severity" value="0" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-1.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="1" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-2.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="2" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-3.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="3" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-4.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="4" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-5.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="5" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-6.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="6" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-7.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="7" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-8.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="8" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-9.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="9" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-10.png" /></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="severity" value="10" (change)="severityChange($event)">
+                                    <span><img src="assets/images/Emoji-11.png" /></span>
+                                </li>
+                            </ul>
+                        </aside>
+                        <article>
+                            <ul>
+                                <li><span>0</span></li>
+                                <li><span>1</span></li>
+                                <li><span>2</span></li>
+                                <li><span>3</span></li>
+                                <li><span>4</span></li>
+                                <li><span>5</span></li>
+                                <li><span>6</span></li>
+                                <li><span>7</span></li>
+                                <li><span>8</span></li>
+                                <li><span>9</span></li>
+                                <li><span>10</span></li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <button (click)="checkinSubmit()">Submit</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

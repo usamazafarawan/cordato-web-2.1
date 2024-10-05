@@ -1,0 +1,213 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Switch Users</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Switch Users</a></li>
+            </ul>
+        </div>
+
+        <div class="RewardsArea">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a (click)="omMyFriendList()" class="nav-link active" data-toggle="tab" href="#Users">Added Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#Invite">Invite User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="onMyRequests()" data-toggle="tab" href="#Requests">My Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="onWhoCanAccessMyDashbord()" data-toggle="tab" href="#Viewed">User Viewed</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="Users">
+                    <div class="CommonArea">
+                        <div class="RequestsBox">
+                            <ul>
+                                <li *ngFor="let item of myFriendList">
+                                    <div class="RequestsLeft">
+                                        <figure><img src="{{item?.friendDetails?.profilePic}}"></figure>
+                                        
+                                        <h4>{{item?.friendDetails?.firstName}} {{item?.friendDetails?.lastName}}</h4>
+                                    </div>
+                                    <div class="RequestsRight">
+                                        <a  [routerLink]="['/switch-dashboard']" [queryParams]="{userId:item?.friendDetails?._id}" href="javascript:void(0)" class="View">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                              </svg>
+                                        </a>
+                                        <a (click)="onDeleteSingle(item._id)" href="javascript:void(0)" class="Cancel">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="NoAvailable" *ngIf="myFriendList.length==0">
+                            <h4>No Data Available</h4>
+                        </div>
+
+                        <!-- <div class="SwitchUser">
+                            <ul>
+                                <li *ngFor="let item of myFriendList"   >
+                                    <label class="CheckBox">{{item?.friendDetails?.firstName}} {{item?.friendDetails?.lastName}}
+                                        <figure><img src="{{item?.friendDetails?.profilePic}}"></figure>
+                                        <input type="checkbox" [checked]="onGetSelected(item._id)">
+                                        <span  (click)="onSelect(item)" class="Checkmark"></span>
+                                        <div class="RequestsRight">
+                                            <a href="javascript:void(0)" class="Cancel">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </label>
+                                </li>
+                               
+                            </ul>
+                        </div> -->
+                    </div>
+
+                    <div class="CommonButon">
+                        <button *ngIf="selectedId.length==1"  [queryParams]="{userId:selectedUser[0]}" class="Button" [routerLink]="['/switch-dashboard']">Change User View</button>
+                        <h4><a (click)="onDeleteMulti()" *ngIf="selectedId.length>0" href="javascript:void(0);"><i class="fa fa-trash"></i> Delete User</a></h4>
+                    </div>
+
+                    
+
+                </div>
+
+                <form [formGroup]="formGroup" class="tab-pane fade" id="Invite">
+                    <div class="CommonArea AppointmentBook">
+                        <div class="CommonHead">
+                            <figure>
+                                <img src="assets/images/profile-1.svg">
+                            </figure>
+                            <h5>Enter Email to invite User</h5>
+                        </div>
+
+                        <div class="CommonBody">
+                            <div class="CommonForm">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label for="">Email</label>
+                                            <input formControlName="email" type="text" class="form-control"
+                                                placeholder="Enter Email" value="zeeshan@gmail.com">
+                                        </div>
+                                        <div class="text-danger"
+                                            *ngIf="(formGroup.get('email')?.hasError('required') && (formGroup.get('email')?.dirty))|| (formInvalid && !this.formGroup.value.email)">
+                                            *Email is required
+                                        </div>
+                                        <div class="text-danger"
+                                            *ngIf="(formGroup.get('email')?.hasError('pattern') && (formGroup.get('email')?.dirty))">
+                                            *Please enter valid email id
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="CommonButon">
+                        <button  (click)="onSave()" class="Button">Invite User</button>
+                    </div>
+
+                </form>
+
+                <div class="tab-pane fade" id="Requests">
+                    <div class="CommonArea">
+
+                        <div class="RequestsBox">
+                            <ul>
+                                <li *ngFor="let item of myRequest">
+                                    <div class="RequestsLeft">
+                                        <figure><img src="{{item?.requestedBy?.profilePic}}"></figure>
+                                        <h4>{{item?.requestedBy?.firstName}} {{item?.requestedBy?.lastName}}</h4>
+                                    </div>
+                                    <div class="RequestsRight">
+                                        <a (click)="onUpdateRequest(item,'Accepted')" href="javascript:void(0)" class="Check">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </a>
+                                        <a (click)="onUpdateRequest(item,'Rejected')" href="javascript:void(0)" class="Cancel">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </li>
+
+
+                           
+
+                            </ul>
+                        </div>
+                        <div class="NoAvailable" *ngIf="myRequest.length==0">
+                            <h4>No Data Available</h4>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Viewed">
+                    <div class="CommonArea" *ngIf="whoCanAccessMyDashbord.length>0"> 
+                        <div class="RequestsBox">
+                            <ul>
+                                <li *ngFor="let item of whoCanAccessMyDashbord">
+                                    <div class="RequestsLeft">
+                                        <figure><img src="{{item?.friendDetails?.profilePic}}"></figure>
+                                        <h4>{{item?.friendDetails?.firstName}} {{item?.friendDetails?.lastName}}</h4>
+                                    </div>
+                                    <div class="RequestsRight">
+                                        <a (click)="onDeleteSingle(item._id)" href="javascript:void(0)" class="Cancel">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </li> 
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="NoAvailable" *ngIf="whoCanAccessMyDashbord.length==0">
+                        <h4>No Data Available</h4>
+                    </div>
+                </div>
+
+            </div>
+
+           
+
+        </div>
+
+
+
+    </div>
+</div>

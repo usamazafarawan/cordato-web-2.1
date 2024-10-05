@@ -1,0 +1,177 @@
+<div class="LoginArea LoginReverse">
+    <div class="LoginLeft">
+        <aside>
+            <video controls>
+                <source src="movie.mp4" type="video/mp4"> 
+                Your browser does not support the video tag.
+            </video>
+            <h3>Lorem Ipsum is simply</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+        </aside>
+    </div>
+
+    <div class="LoginRight">
+        <aside>
+
+            <a [routerLink]="['/register-clickon']" class="BackButton"><i class="fa fa-long-arrow-left"></i> Back</a>
+            <h5 class="Step">Step 7 of 7 </h5>
+            <h1>Membership</h1>
+            <h6>Select Membership Plan</h6>
+
+            <div *ngFor="let sub of subscriptionList; let i=index">
+                <div class="MemberShip" *ngIf="sub.interval_count==1">
+                    <h1>{{sub.yearlyCost==0?'Free':sub.interval_count==6?'6 Month Membership':sub.interval_count==1?'1 Year Membership':''}}</h1>
+                    <ul>
+                        
+                        <li *ngIf="sub.accessOtherDash">
+                            <span><img src="assets/images/check.svg"></span>
+                            Access to your family Dashboard
+                        </li>
+                        <li *ngIf="sub.healthDashboard">
+                            <span><img src="assets/images/check.svg"></span>
+                            Health Dashboard
+                        </li>
+                        <li *ngIf="sub.virtualDoc">
+                            <span><img src="assets/images/check.svg"></span>
+                            Virtual Doc
+                        </li>
+    
+                        <li *ngIf="sub.mentalHealth"> 
+                            <span><img src="assets/images/check.svg"></span>
+                            Mental Health
+                        </li>
+                        <!-- <li *ngIf="sub.counseling"> <span><img src="assets/images/check.svg"></span>
+                            Counseling</li>
+                        <li *ngIf="sub.psychiatric"> <span><img src="assets/images/check.svg"></span>
+                            Psychiatric</li> -->
+    
+                        <li *ngIf="sub.analaytics"> 
+                            <span><img src="assets/images/check.svg"></span>
+                            Analytics
+                        </li>
+                        <li *ngIf="sub.checkin"> 
+                            <span><img src="assets/images/check.svg"></span>
+                            Check-In
+                        </li>
+                        <li *ngIf="sub.earnRewards"> 
+                            <span><img src="assets/images/check.svg"></span>
+                            Earn Rewards
+                        </li>
+                        <li *ngIf="sub.healthAlert"> 
+                            <span><img src="assets/images/check.svg"></span>
+                            Predictive Health Monitoring and Alerting
+                        </li>
+                        <li *ngIf="sub.yearlyCost>0"> 
+                            <span><img src="assets/images/check.svg"></span>
+                            {{sub.interval_count==6?'Billed at $199 per 6 Month':'Billed at $379 per year'}}
+                        </li>
+                        <li *ngIf="sub.yearlyCost>0"> 
+                            <span><img src="assets/images/check.svg"></span>
+                            Auto Renews at the end of the subscribtion unless cancelled beforehand
+                        </li>
+                    </ul>
+                    <div class="Price">
+                        <!-- <h3><span>${{sub.monthlyPaid}}</span>user/month</h3> -->
+                        <button (click)="onPayment(sub)">{{sub.yearlyCost==0?'Go with Free':sub.interval_count==6?'Pay $7.65 per week':sub.interval_count==1?'Pay $7.29 per week':''}} <img src="assets/images/next-arrow.svg" /></button>
+                    </div>
+                </div>
+            </div> 
+
+            <!-- <div id="MemberSlider" class="carousel slide" data-ride="carousel"> 
+                <div class="carousel-inner"> 
+                    <div class="carousel-item {{i==activeIndex?'active':''}}" *ngFor="let sub of subscriptionList; let i=index">
+                        <div class="MemberShip" *ngIf="sub.interval_count==1">
+                            <h1>{{sub.yearlyCost==0?'Free':sub.interval_count==6?'6 Month Membership':sub.interval_count==1?'1 Year Membership':''}}</h1>
+                            <ul>
+                                
+                                <li *ngIf="sub.accessOtherDash">
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Access to your family Dashboard
+                                </li>
+                                <li *ngIf="sub.healthDashboard">
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Health Dashboard
+                                </li>
+                                <li *ngIf="sub.virtualDoc">
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Virtual Doc
+                                </li>
+            
+                                <li *ngIf="sub.mentalHealth"> 
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Mental Health
+                                </li>
+                                <li *ngIf="sub.counseling"> 
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Counseling
+                                </li>
+                                <li *ngIf="sub.psychiatric"> 
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Psychiatric
+                                </li>
+            
+                                <li *ngIf="sub.analaytics"> 
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Analytics
+                                </li>
+                                <li *ngIf="sub.checkin"> 
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Check-In
+                                </li>
+                                <li *ngIf="sub.earnRewards"> 
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Earn Rewards
+                                </li>
+                                <li *ngIf="sub.healthAlert"> 
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Predictive Health Monitoring and Alerting
+                                </li>
+                                <li *ngIf="sub.yearlyCost>0"> 
+                                    <span><img src="assets/images/check.svg"></span>
+                                    {{sub.interval_count==6?'Billed at $199 per 6 Month':'Billed at $379 per year'}}
+                                </li>
+                                <li *ngIf="sub.yearlyCost>0"> 
+                                    <span><img src="assets/images/check.svg"></span>
+                                    Auto Renews at the end of the subscribtion unless cancelled beforehand
+                                </li>
+                            </ul>
+                            <div class="Price">
+                                <h3><span>${{sub.monthlyPaid}}</span>user/month</h3>
+                                <button (click)="onPayment(sub)">{{sub.yearlyCost==0?'Go with Free':sub.interval_count==6?'Pay $7.65 per week':sub.interval_count==1?'Pay $7.29 per week':''}} <img src="assets/images/next-arrow.svg" /></button>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+             
+                <a class="carousel-control-prev" href="#MemberSlider" data-slide="prev" (click)="onindexActive('Pre')">
+                    <img src="assets/images/color-arrow.svg">
+                </a>
+                <a class="carousel-control-next" href="#MemberSlider" data-slide="next" (click)="onindexActive('Frw')">
+                    <img src="assets/images/color-arrow.svg">
+                </a>
+            </div>  -->
+
+            <div class="ORBox">
+                <span>Or</span>
+            </div>
+
+            <div class="MemberShip"> 
+                <form [formGroup]="formGroup">
+                    <div class="form-group">
+                        <label>Voucher Code</label>
+                        <input  formControlName="code" type="text" class="form-control" placeholder="Enter Voucher Code">
+                    </div>
+                    <div class="text-danger"
+                    *ngIf="(formGroup.get('code')?.hasError('required') && (formGroup.get('code')?.dirty))|| (formInvalid && !this.formGroup.value.code)">
+                    *Code is required
+               </div>
+                    <div class="Price">
+                        <button (click)="onDataApply()">Next</button>
+                    </div>
+                </form>
+            </div>
+ 
+        </aside>
+    </div>
+
+</div>

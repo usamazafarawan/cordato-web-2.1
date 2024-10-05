@@ -1,0 +1,68 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+    	<div class="BreadcumBox">
+            <h5>Previous Interactions</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Previous Interactions</a></li>
+            </ul>
+        </div>
+
+        <from [formGroup]="formGroup"  class="DateFilter">
+        	<div class="form-group">
+        		<label>From Date</label>
+        		<input  formControlName="fromDate" type="date" class="form-control ">
+        	</div>
+        	<div class="form-group">
+        		<label>To Date</label>
+        		<input formControlName="toDate" type="date" class="form-control">
+        	</div>
+        	<div class="form-group">
+        		<label>&nbsp;</label>
+        		<button (click)="onSave()">Apply</button>
+        		<button (click)="onReset()" class="Reset">Reset</button>
+        	</div>
+        </from>
+
+    	<div class="AppointmentDeatils">
+    		<div class="card">
+                <div class="card-header" data-toggle="collapse" href="#collapseSix" aria-expanded="true">
+                    <h4>Previous Interactions</h4>
+                </div>
+                <div id="collapseSix" class="collapse show">
+                    <div class="card-body">
+                        <div class="TableBox">
+                            <table class="table">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Reason</th>
+                                    <th>Main Symptoms</th>
+                                    <th>Feeling Better</th>
+                                    <th>Time to Recovery</th>
+                                    <th></th>
+                                </tr>  
+                                <tr  *ngFor="let item of appointment">
+                                    <td>{{getTime(item.date)}}</td>
+                                    <td>{{item.reasonForVisit}}</td>
+                                    <td>{{item.discomfort}} </td>
+                                    <!-- <td>Strep </td>
+                                    <td>Ammaxicilan </td> -->
+                                    <td class="text-danger">{{item.feelingBetterDays?item.feelingBetterDays:0}} {{!item.feelingBetterDays?'':item.feelingBetterDays<2?"Day":"Days"}}</td>
+                                    <td class="text-danger">{{item.recoveredDays?item.recoveredDays:0}} {{!item.recoveredDays?'':item.recoveredDays<2?"Day":"Days"}}</td>
+                                    <td><a [queryParams]="{ appId:item._id}" [routerLink]="['/appointment-details']" href="javascript:void(0);">Details</a></td>
+                                </tr>
+                              
+                            </table>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>	
+
+
+    </div>
+</div>

@@ -1,0 +1,165 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Past Appointments</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Past Appointments</a></li>
+            </ul>
+        </div> 
+        
+        <div class="CommonArea">
+            <div class="TableList">
+
+                <div class="TableHead">
+                    <form  [formGroup]="otpForm" action="">
+                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input  formControlName="searchText" (input)="onSearch()" type="text" placeholder="Search">
+                    </form>
+                </div>
+
+                <div class="Tablescroll">
+                    <table class="table">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Image</th>
+                            <th>Doctor Name</th>
+                            <th>Speciality</th>
+                            <th>Date & Time</th>
+                            <!-- <th>Dx</th>
+                            <th>Rx</th> -->
+                            <th>Comment</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr *ngFor="let item of appointmetmentList; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>
+                                <figure><img src="{{item?.doctorDetails?.profilePic}}" alt=""></figure>
+                            </td>
+                            <td>{{item?.doctorDetails?.designation}} {{item?.doctorDetails?.firstName}} {{item?.doctorDetails?.lastName}}</td>
+                            <td>{{item?.doctorDetails?.department}}</td>
+                            <td>{{getTime(item?.date)}}, {{item?.slotDetails?.startCombine}}-{{item?.slotDetails?.endCombine}}</td>
+                            <!-- <td>High BP</td>
+                            <td>Medicine 1 x 1 week</td> -->
+                            <td>{{item?.appdiagnosisordsDetails?.orderCommmnet}}</td>
+                            <td>
+                                <a (click)="onShow(item)" href="javascript:void(0);" class="View" data-toggle="modal" >
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    View Details
+                                </a>
+                            </td>
+                        </tr> 
+                
+                    </table>
+                </div>
+                    
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+<div class="ModalBox">
+    <div class="modal ModalCenter" id="PastDetailsModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="DoctorConsult">
+                    <div class="DoctorHead">
+                        <figure>
+                            <img src="{{selectedApp?.doctorDetails?.profilePic}}" alt="">
+                            <span></span>
+                        </figure>
+                        <figcaption>
+                            <h3>{{selectedApp?.doctorDetails?.designation}} {{selectedApp?.doctorDetails?.firstName}} {{selectedApp?.doctorDetails?.lastName}}</h3>
+                            <h5>{{selectedApp?.doctorDetails?.department}} </h5>
+                            <p><i class="fa fa-star"></i> <strong>{{selectedApp.doctorDetails?.avgRating}}</strong> <span>({{selectedApp.doctorDetails?.reviewCount}} Feedback)</span></p>
+                            
+                        </figcaption>
+                    </div>
+
+                    <div class="DoctorBody">
+                        <aside>
+                            <h4>
+                                <img src="assets/images/calender.svg" alt="">
+                                Consult Time
+                            </h4>
+                            <h5>{{getTime(selectedApp?.date)}}</h5>
+                            <h5>{{selectedApp?.slotDetails?.startCombine}}-{{selectedApp?.slotDetails?.endCombine}}</h5>
+                            <!-- <h5>Live chat consult : $45 / visit</h5>
+                            <h5>Live chat consult : </h5>
+                            <h5>Dx : High BP</h5>
+                            <h5>Rx : Medicine 1 x 1 week</h5> -->
+
+                            <h3>
+                                <a href="javascript:void(0);" data-dismiss="modal" [routerLink]="['/appointment-details']" [queryParams]="{ appId:selectedApp._id}" >View Full Appointment Detail</a>
+                            </h3>
+
+                            <h6>
+                                <a href="javascript:void(0);" data-dismiss="modal"  data-toggle="modal" data-target="#RatingModal">Ratings your doctor</a>
+                            </h6>
+
+                        </aside> 
+                    </div>
+ 
+                </div>
+            </div>
+        </div>
+    </div>  
+    
+    <div class="modal ModalCenter" id="RatingModal">
+        <div class="modal-dialog">
+            <form   [formGroup]="ratingForm" class="modal-content">
+                <div class="Category">
+                    <a href="javascript:void(0);" class="CloseModal" data-dismiss="modal">×</a>
+                    <h3>Write a Review</h3> 
+
+                    <div class="form-group">
+                        <label>Would you recommend {{selectedApp.doctorDetails?.designation}} {{selectedApp?.doctorDetails?.firstName}} {{selectedApp?.doctorDetails?.lastName}} to your friends?</label>
+                        <label class="Radio" style="width: 30%; display: inline-block;">Yes
+                            <input formControlName="recommendDoc"  type="radio"  value="Yes" name="recommendDoc" > 
+                            <span class="Radiomark"></span>
+                        </label>
+
+                        <label class="Radio" style="width: 30%; display: inline-block;">No
+                            <input formControlName="recommendDoc"  value="No"  type="radio" name="recommendDoc" > 
+                            <span class="Radiomark"></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>How would you rate your overall experience with {{selectedApp.doctorDetails?.designation}} {{selectedApp?.doctorDetails?.firstName}} {{selectedApp?.doctorDetails?.lastName}} wells services? </label> 
+                        <div class="RatingBox">
+                            <fieldset class="rating">
+                                
+                                <input  formControlName="rating" type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label> 
+                                <input  formControlName="rating" type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> 
+                                <input  formControlName="rating" type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                <input  formControlName="rating" type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label> 
+                                <input  formControlName="rating" type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                <input  formControlName="rating" type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                <input  formControlName="rating" type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label> 
+                                <input  formControlName="rating" type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label> 
+                                <input  formControlName="rating" type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                
+                                <input  formControlName="rating" type="radio" id="starhalf" name="rating" value=".5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                
+                            </fieldset>                            
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea formControlName="review" class="form-control" rows="4" placeholder="Description"></textarea>
+                    </div>
+
+                    <button class="Button" (click)="onSaveRating()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div> 
+</div>

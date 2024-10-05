@@ -1,0 +1,195 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Book Appointment</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a [routerLink]="['/dashboard']">Home </a></li>
+                <li><a [routerLink]="['/appointment-book']">Book Appointment</a></li> 
+            </ul>
+            <p>Step 1 of 5</p>
+        </div>
+ 
+        <div class="CommonArea AppointmentBook">
+            <div class="CommonHead">
+                <figure>
+                    <img src="assets/images/profile-1.svg">
+                </figure>
+                <h5>My Contact Information</h5> 
+            </div>  
+                      
+            <div class="CommonBody">
+                <form  [formGroup]="formGroup" class="CommonForm">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">First Name</label>
+                                <input  readonly formControlName="firstName"  type="text" class="form-control" placeholder="First Name" >
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">Last Name</label>
+                                <input readonly formControlName="lastName"  type="text" class="form-control" placeholder="Last Name" >
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input  readonly formControlName="email"   type="text" class="form-control" placeholder="Enter Email Address" >
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label for="">Phone Number</label>
+                                <input readonly formControlName="phoneNumber" type="text" class="form-control" placeholder="+91 xxxxxxxxxx" >
+                                <span class="Icon"><a href="javascript:void(0);" data-toggle="modal" data-target="#NumberModal">Edit</a></span>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="">Address</label>
+                                <input  readonly formControlName="address" type="text" class="form-control" placeholder="Enter Address" >
+                                <span class="Icon"><a href="javascript:void(0);"   (click)="onEditAddress()" >Edit</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="CommonArea AppointmentBook">
+            <div class="CommonHead">
+                <figure>
+                    <img src="assets/images/chain.svg">
+                </figure>
+                <h5>My Preferred Pharmacy</h5> 
+            </div>  
+                      
+            <div class="CommonBody">
+                <form [formGroup]="formGroup" class="CommonForm">
+                    
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <div class="Radio" style="padding: 0;">
+                                    <div class="Insurance">
+                                        <i class="fa fa-paperclip" aria-hidden="true"></i> Add insurance policy <span>(optional)</span>
+                                        <input (change)="onFileChange($event)" type="file">
+                                    </div>
+                                </div>           
+                            </div>
+
+                            <div class="form-group">
+                                <div class="Radio" style="padding: 0;">
+                                    <label for="">Your Own Pharmacy</label>
+                                    <input formControlName="pharmacy" type="text" class="form-control" > 
+                                </div>           
+                            </div>
+                        </div> 
+
+                        <div class="col-sm-5">
+                            <span *ngIf="filepath" class="UploadInsurance">
+                                <a (click)="onRemoveImage()">&times;</a>
+                                <img src="{{filepath?filepath:''}}" alt="">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-5">
+                            
+                        </div> 
+                    </div> 
+                </form>
+            </div>
+        </div>
+
+        <div class="CommonButon"> 
+            <button class="Button" (click)="onBookAppointment()">Select <img src="assets/images/next-arrow.svg" /></button>
+        </div>
+            
+  
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div class="modal" id="LocationModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="LoginArea LocationModal"> 
+                    <div class="LoginRight">
+                        <form [formGroup]="formGroup3" class="Map">
+                            <img src="assets/images/map.png">
+                            <div class="Search">
+                                <span><img src="assets/images/Search.svg" /></span>
+                                <input type="text" formControlName="searchAddress" id="sourcePlace"
+                                (focus)="focusFunction('sourcePlace')" type="text" class="form-control"
+                                placeholder="Sector 63, Noida">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="(formGroup3.get('searchAddress')?.hasError('required') && (formGroup3.get('searchAddress')?.dirty))|| (formInvalid && !this.formGroup3.value.searchAddress)">
+                                *Address is required
+                            </div>
+                        </form>
+                        <div   class="Form">
+                            <aside>
+                                <form [formGroup]="formGroup3" action="">
+                                    <div class="form-group">
+                                        <label for="">Address</label>
+                                        <input formControlName="address" type="text" class="form-control" placeholder="Enter Address" >
+                                    </div>
+                                    <div class="text-danger"
+                                    *ngIf="(formGroup3.get('address')?.hasError('required') && (formGroup3.get('address')?.dirty))|| (formInvalid && !this.formGroup3.value.address)">
+                                    *Address is required
+                                </div>
+                                    <div class="form-group">
+                                        <label for="">Building/Apartment No.</label>
+                                        <input formControlName="building" type="text" class="form-control" placeholder="Enter Building No." > 
+                                    </div> 
+                                    <div class="text-danger"
+                                    *ngIf="(formGroup3.get('building')?.hasError('required') && (formGroup3.get('building')?.dirty))|| (formInvalid && !this.formGroup3.value.building)">
+                                    *Building is required
+                                </div>
+                                
+                                </form>
+                                <button (click)="onSetLoction()">Set Location <img src="assets/images/next-arrow.svg" /></button>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="NumberModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="Category">
+                    <h3>Update Phone Number</h3>
+                    <form action="" [formGroup]="formGroup1">
+                        <div class="form-group">
+                            <label for="">Phone Number</label>
+                            <input formControlName="phoneNumber" type="text" class="form-control" placeholder="Enter Address" value="+919956178***0">
+                        </div> 
+                        <div class="text-danger"
+                            *ngIf="(formGroup1.get('phoneNumber')?.hasError('required') && (formGroup1.get('phoneNumber')?.dirty))|| (formInvalid1 && !this.formGroup1.value.phoneNumber)">
+                            *Phone Number is required
+                        </div>
+                        <div class="text-danger" *ngIf="phoneInvalid">
+                            *Please enter Phone Number in given format +91-995617***0
+                        </div>
+                        <button class="Button" (click)="AddressStep()">Update</button>
+                    </form> 
+                </div> 
+            </div>
+        </div>
+    </div>
+
+</div>

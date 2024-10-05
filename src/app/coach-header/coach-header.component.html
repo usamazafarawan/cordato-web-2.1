@@ -1,0 +1,19 @@
+<div class="CoachHeader">
+	<figure><img src="assets/images/Logo.svg"></figure>
+	<div class="Avater">
+        <a href="javascript:void(0);">
+            <figure><img src="{{loginData?.profilePic}}"></figure> {{loginData?.firstName}} {{loginData?.lastName}}
+        </a>
+        <ul>
+            <li>
+                <figure><img src="{{loginData?.profilePic}}"></figure>
+                <h4>{{loginData?.firstName}} {{loginData?.lastName}}</h4>
+            </li> 
+            <li>
+            	<a [routerLink]="['/']">
+            		<span><i class="fa fa-sign-out"></i></span> Logout
+            	</a>
+            </li>
+        </ul>
+    </div>
+</div>

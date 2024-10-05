@@ -1,0 +1,84 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Manage Subscription</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Manage Subscription</a></li>
+                <li><a href="javascript:void(0);">Genrate Sub Plan Code</a></li>
+            </ul>
+             <a [routerLink]="['/health-gift']"  href="javascript:void(0);" class="Download" >Add Coupon</a> 
+        </div> 
+        
+        <div class="CommonArea">
+            <div class="TableList">  
+                <table class="table table-striped">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Code </th>
+                        <th>Plan</th>
+                        <th>Points</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr *ngFor="let item of subCoupon;let i=index">
+                    	<td>{{i+1}}</td>
+                    	<td>{{item.code}} </td>
+                    	<td>{{item.plan}} Month</td>
+                    	<td>{{item.points}}</td>
+                    	<td><span class="green">{{item.status}}</span></td>
+                    </tr> 
+                </table> 
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+<div class="ModalBox">
+    <div class="modal" id="PlanModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="Category">
+                    <a class="CloseModal" data-dismiss="modal" href="JavaScript:Void(0);">×</a>
+                    <h3>Add Coupon</h3> 
+                    <form [formGroup]="formGroup">
+                        <div class="row"> 
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Plan</label>
+                                    <select formControlName="rewardsSubId"  class="form-control">
+                                        <option>Select Plan</option>
+                                        <option *ngFor="let item of planData" value="{{item._id}}" >{{item.plan}} Month</option>
+                                    </select>
+                                </div>
+                                <div class="text-danger"
+                                *ngIf="(formGroup.get('rewardsSubId')?.hasError('required') && (formGroup.get('rewardsSubId')?.dirty))|| (formInvalid && !this.formGroup.value.rewardsSubId)">
+                                *Plan is required
+                           </div>
+                            </div>
+        
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Required Rewards</label>
+                                    <input readonly type="text"  class="form-control" placeholder="" value="{{getValue()}}"> 
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button class="Button" (click)="onSubmit()">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

@@ -1,0 +1,673 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>My Health Record</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <!-- <li><a href="javascript:void(0);">Home </a></li> -->
+                <li><a href="javascript:void(0);">My Health Record</a></li>
+            </ul>
+        </div>
+
+ 
+        <div class="RewardsArea">
+
+            <a href="javascript:void(0);" (click)="onGetreports()" class="Download">
+                <i class="fa fa-download"></i>
+                Download Report
+            </a>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" (click)="onGetUserData()" href="#Patient">Patient
+                        Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" (click)="onGetCheckin()" href="#Checkin">Checkin History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="onGetVitalHistory()" data-toggle="tab" href="#Vital">Vital History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" (click)="onGetECG()" href="#Data">ECG Data</a>
+                </li>
+               <!--  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#Labs">Labs</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" (click)="onGetHrxDrx()" data-toggle="tab" href="#report">Dx and Rx report </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  (click)="getFamilyList()" data-toggle="tab" href="#Family">Family History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  data-toggle="tab" href="#Document">Document</a>
+                </li>
+            </ul>
+
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="Patient">
+                    <div class="AppointmentDeatils">
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header" data-toggle="collapse" href="#collapseHealthTimeline"
+                                    aria-expanded="true">
+                                    <h4>Health Timeline</h4>
+                                </div>
+                                <div id="collapseHealthTimeline" class="collapse show">
+                                    <div class="card-body">
+                                        <div class="row p-4">
+                                            <div class="col-lg-3">
+                                                <div class="row">
+                                                    <div class="col-lg-5">
+                                                        <img style="border-radius: 100%;" src="{{userData?.profilePic}}">
+                                                    </div>
+                                                    <div class="col-lg-7 p-4">
+                                                        <div class="row">
+                                                            <!-- <div class="col-12"><h3>{{userData?.firstName}} {{userData?.lastName}}</h3></div> -->
+                                                            <div class="col-12"><strong>Phone: </strong></div>
+                                                            <div class="col-12">{{userData?.countryCode}}-{{userData?.mobileNumber}}</div>
+                                                            <div class="col-12"><strong>DOB: </strong></div>
+                                                            <div class="col-12">{{getTime(userData?.dob)}}</div>
+                                                            <div class="col-12"></div>
+                                                        </div>    
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-lg-12">
+                                                        <h5>Medical History</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2" *ngFor="let appointment of appointments;index as i">
+                                                    <div class="col-lg-12">
+                                                        <div class="card mb-2">
+                                                            <div class="card-header pb-1" data-toggle="collapse" [attr.href]="'#disease' +i" aria-expanded="false" (click)="onCollapseClick(i)">
+                                                             <div class="row">
+                                                                    <div class="col-lg-12"> 
+                                                                        <h6 style="font-size: 12px;">{{convertDate(appointment.date)}}</h6>  
+                                                                        <h5 style="font-weight: 600;font-size: 1.1rem;;">{{appointment?.diagnosisData[0]?.name}}</h5>
+                                                                    </div>
+                                                                    <div class="col-lg-12">
+                                                                        <h6 style="font-weight: 600; font-size: 0.9rem;line-height: 24px;">{{appointment.discomfort}}</h6>   
+                                                                    </div>
+                                                                </div>      
+                                                            </div>
+                                                            <div [attr.id]="'disease' + i" class="collapse pl-3 pr-3">
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                            <p> {{appointment.dxSummary}} </p>
+                                                                        </div>    
+                                                                    </div>    
+                                                                    <div class="row mt-2">
+                                                                        <div class="col-lg-12">
+                                                                            <div *ngFor="let imageUrl of appointment.attachments; let i = index">
+                                                                                <img *ngIf="i < 3" [src]="imageUrl" style="height: 100px;">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>    
+                                                                    <div class="row mt-2">
+                                                                        <div class="col-lg-6"><a href="#" class="btnk">View Tests</a></div>
+                                                                        <div class="col-lg-6"><a href="#" class="btnk">Prescribed Treatment</a></div>
+                                                                    </div>    
+                                                                </div>
+                                                            </div>    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div class="row">
+                                                    <ng-container *ngFor="let para of parameterList">
+                                                        <div class="col-lg-4" *ngIf="para.name !== 'Surgeries'">
+                                                            <div class="Medication SurgeryMedication mb-0"  *ngIf="para.name !== 'Surgeries'">
+                                                                <h4 class="mb-2">{{para.name}}</h4>
+                                                                <a class="MedicationOpen" href="javascript:void(0);" (click)="onSelectParameter(para)">
+                                                                    Select {{para.name}}</a>
+                                
+                                                                <div class="MedicationList" style="display: block;"
+                                                                    *ngIf="para.selectedSubParameters && para.selectedSubParameters.subparametersname">
+                                                                    <span *ngFor="let select of para.selectedSubParameters.subparametersname">
+                                                                        {{select.name}}
+                                                                        <a href="javascript:void(0);"
+                                                                            (click)="ondelete(select._id,para._id)">&times;</a>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-lg-4 p-3">
+                                                        <div class="row m-0 mb-2">
+                                                            <div class="col-lg-12 text-left m-0 p-0"><h5>Anatomy</h5></div>
+                                                        </div>
+                                                        <div class="row kamcheck">
+                                                            <div class="col-lg-12" style="justify-content: center;">
+                                                                <p class="text-center">{{appointments[idx].discomfort}}</p>
+                                                                <ul class="nav nav-tabs mb-2 text-center" style="justify-content: center;">
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link pb-0 active" data-toggle="tab" href="#front">Front</a>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link pb-0" data-toggle="tab" href="#back">Back</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-lg-12 tab-content text-center">
+                                                                <div id="front" class="tab-pane active image-container" style="margin: 0px auto;">
+                                                                    <img [src]="baseImageFront"  class="base-image" />
+                                                                    <svg #svgElement
+                                                                        class="overlay-svg"
+                                                                        width="214.844"
+                                                                        height="421.327"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                    <!-- SVG content will be loaded and manipulated dynamically -->
+                                                                    </svg>
+                                                                </div>
+                                                                <div id="back" class="tab-pane image-container" style="margin: 0px auto;">
+                                                                    <img [src]="baseImageBack"  class="base-image" />
+                                                                    <svg #svgElementBack
+                                                                        class="overlay-svg"
+                                                                        width="214.844"
+                                                                        height="421.327"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                    <!-- SVG content will be loaded and manipulated dynamically -->
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>        
+                                                    </div>
+                                                    <div class="col-lg-4 p-3" >
+                                                        <div class="row m-0 mb-2">
+                                                            <div class="col-lg-9 MedicationOpen"><h5>Vitals</h5></div>
+                                                        </div>
+                                                        <ng-container *ngFor="let vital of vitalsData">
+                                                            <div class="text-center" [ngStyle]="{'background-color': (vital.value > vital.maxValue) ? '#f3cbcb' : 'transparent'}"class="row p-2 m-1 mb-2" style="display: flex; flex-direction: row; justify-content: space-between;background-color: #fff;border-radius: 10px;box-shadow: 0 0 10px #ddd;">
+                                                                <div class="col-lg-4 col-sm-12 mb-2">
+                                                                    {{vital.name}}
+                                                                  </div>
+                                                                  <div class="col-lg-3 col-sm-12 mb-2">
+                                                                    {{vital.value}}
+                                                                  </div>
+                                                                  <div class="col-lg-5 col-sm-12 mb-2">
+                                                                    {{vital.minValue}}-{{vital.maxValue}}/{{vital.unit}}
+                                                                  </div>
+                                                            </div>
+                                                        </ng-container>
+                                                    </div>
+                                                    <div class="col-lg-4 p-3">
+                                                        <div class="row mb-2 p-1">
+                                                            <div class="col-lg-9"><h5>Tasks</h5></div>
+                                                            <div class="col-lg-3 text-right MedicationOpen"><h5>+</h5></div>
+                                                        </div>
+                                                        <ng-container *ngFor="let task of allTask">
+                                                            <div class="row p-2 m-1 mb-2" style="display: flex; flex-direction: row; justify-content: space-between;background-color: #fff;border-radius: 10px;box-shadow: 0 0 10px #ddd;">
+                                                                <div class="col-lg-9">{{task.title}}</div>
+                                                                <div class="col-lg-3 text-right"><input type="checkbox"/></div>
+                                                            </div>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>            
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Checkin">
+                    <div class="row">
+                        <div class="col-lg-6" *ngFor="let check of checkinList; let i=index">
+                            <div class="CheckinHistory">
+                                <aside>
+                                    <p>
+                                        <label>Check In Date</label>
+                                        <span>{{getTime(check.createdAt)}}</span>
+                                    </p>
+                                    <p>
+                                        <label>Checkin Question</label>
+                                        <span>{{check?.questionsDetails?.question}}</span>
+                                    </p>
+                                </aside>
+                                <aside>
+                                    <p>
+                                        <label>Check In Answer </label>
+                                        <span class="Green">I'm Feeling {{check?.answer}}</span>
+                                    </p>
+                                    <!-- <p>
+                                        <label>Frequency </label>
+                                        <span>3 Times</span>
+                                    </p> -->
+                                </aside>
+                                <aside> 
+                                    <p>
+                                        <label>Area of Discomfort</label>
+                                        <span>{{check?.whatBotheringYou}}</span>
+                                    </p>
+                                </aside>
+                                <aside>
+                                    <p>
+                                        <label>Symptoms </label>
+                                        <span>{{check?.symptomsDetails.length>0?'':'NA'}}</span>
+                                    </p>
+                                    <div class="AppointmentDeatils">
+                                        <div class="Symptomsappointment">
+                                            <div class="SymptomsLeft">
+                                                <div class="TableBox">
+                                                    <table class="table table-striped">
+                                                        <tr *ngFor="let sym of check?.symptomsDetails; let ind = index">
+                                                            <td>Symptoms#{{ind+1}}</td>
+                                                            <td>{{sym.symptoms}}</td>
+                                                        </tr>
+                                                        <!-- <tr> 
+                                                            <td>Symptoms#2</td>
+                                                            <td>Headache</td>
+                                                        </tr>
+                                                        <tr> 
+                                                            <td>Symptoms#3</td>
+                                                            <td>Lung pain</td>
+                                                        </tr> -->
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Vital">
+                    <div class="AppointmentDeatils">
+                        <div id="accordion"> 
+                            <div class="card" *ngFor="let data of vitalList; let i=index">
+                                <div class="card-header" data-toggle="collapse" attr.href="#VitalOne{{i}}" 
+                                    aria-expanded="true">
+                                    <h4>Vital Readings - {{getTime(data._id)}}</h4>
+                                </div>
+                                <div id="VitalOne{{i}}" class="collapse show">
+                                    <div class="card-body">
+                                        <div class="TableBox">
+                                            <table class="table">
+                                                <tr>
+                                                    <th>Vitals</th>
+                                                    <th>Value</th>
+                                                    <th>Normal</th>
+                                                    <th>Reported Health</th>
+                                                    <th>Date</th>
+                                                    <th>Time</th>
+                                                </tr>
+                                                <tr *ngFor="let item of data.vitalHistory; let i=index">
+                                                    <td>{{item.parameters.name}}</td>
+                                                    <td>{{item.value}}</td>
+                                                    
+                                                    <td>
+                                                        <span *ngIf="!item.parameters.range">NA</span><span
+                                                            *ngIf="item.parameters.range">{{item?.parameters?.minRange}}-{{item?.parameters?.maxRange}}</span>
+                                                    </td>
+                                                    <td><span
+                                                            class="{{getColorCode(item)}}">{{getColorCode(item)=='Good'?'Good':'Bad'}}</span>
+
+                                                    </td>
+                                                    <td>{{getTime(item.createdAt)}}</td>
+                                                    <td>{{getAmPm(item.createdAt)}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="NoAvailable" *ngIf="vitalList.length==0">
+                            <h4>No Data Available</h4>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Data">
+                    <div class="AppointmentDeatils">
+                        <div id="accordion">
+                            <div class="card" *ngFor="let ecg of ecgList;let i =index">
+                                <div class="card-header" data-toggle="collapse" attr.href="#ECG{{i}}" aria-expanded="true">
+                                    <h4>ECG Data - {{getTime(ecg._id)}}</h4>
+                                </div>
+                                <div id="ECG{{i}}" class="collapse show">
+                                    <div class="card-body">
+                                        <div class="ECGBox">
+                                            <aside *ngFor="let link of ecg.appointments;let ind =index">
+                                                <img src="assets/images/pdf.svg" alt="">
+                                                <em>{{getFileName(link.ecg)}}</em>
+                                                <a href="javascript:void(0);" (click)="onOpen(link.ecg)">Download</a>
+                                            </aside>
+
+                                            <!-- <aside>
+                                                <img src="assets/images/Images.svg" alt="">
+                                                <em>body_issue.pdf</em>
+                                                <a href="javascript:void(0);">Download</a>
+                                            </aside> -->
+
+                                            <aside>
+                                                <span>
+                                                    <i class="fa fa-paperclip"></i>
+                                                    {{ecg.appointments.length}}
+                                                    {{ecg.appointments.length>1?'Attachments':'Attachment'}}
+                                                </span>
+                                                <a href="javascript:void(0);"
+                                                    (click)="onDaonloadAll(ecg.appointments)">Download all
+                                                    attachments</a>
+                                                <a href="javascript:void(0);"
+                                                    (click)="onDaonloadAll(ecg.appointments)">View all images</a>
+                                            </aside>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Labs">
+                    <div class="CommonArea">
+                        <div class="TableList LabTable">
+                            <div class="TableHead">
+                                <form action="">
+                                    <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                                    <input type="text" placeholder="Search">
+                                </form>
+                            </div>
+
+                            <table class="table">
+                                <tr>
+                                    <th>Test</th>
+                                    <th>Ordered By</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td>Lipid Panel</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>10/01/2019</td>
+                                    <td>10:00 AM</td>
+                                    <td>
+                                        <a [routerLink]="['/health-record-details']">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Glucose, Plasma</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>10/01/2019</td>
+                                    <td>10:00 AM</td>
+                                    <td>
+                                        <a [routerLink]="['/health-record-details']">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Urinalysis, Routine</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>10/01/2019</td>
+                                    <td>10:00 AM</td>
+                                    <td>
+                                        <a [routerLink]="['/health-record-details']">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>CMP14+CBC/D/PLT+TSH</td>
+                                    <td>Lorem Ipsum</td>
+                                    <td>10/01/2019</td>
+                                    <td>10:00 AM</td>
+                                    <td>
+                                        <a [routerLink]="['/health-record-details']">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="report">
+                    <div class="AppointmentDeatils">
+                        <div id="accordion">
+
+                            <div class="card" *ngFor="let data of hrxDrx; let i=index">
+                                <div class="card-header" data-toggle="collapse" attr.href="#hrxDrx{{i}}"
+                                    aria-expanded="true">
+                                    <h4>Dx Rx Reading - {{getTime(data._id)}}</h4>
+                                </div>
+                                <div id="hrxDrx{{i}}" class="collapse show">
+                                    <div class="card-body" *ngFor="let item of data.list; let i=index">
+                                        <div class="TableBox CommentTable">
+                                            <table class="table ">
+                                                <tr>
+                                                    <th>Comment</th>
+                                                    <td>{{item.appdiagnosisordsDetails && item.appdiagnosisordsDetails.orderCommmnet?item.appdiagnosisordsDetails.orderCommmnet:'NA'}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        
+                                        <div class="TableBox">
+                                            
+                                            <table class="table">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <!-- <th>Code</th> -->
+
+                                                </tr>
+                                                <tr
+                                                    *ngFor="let dygno of item.orderdiagnosesList.diagnosesDetails; let i=index">
+                                                    <td>{{dygno.name}}</td>
+                                                    <!-- <td>{{dygno.code}}</td> -->
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Family">
+                    <div class="AppointmentDeatils">
+                        <div id="accordion">
+
+                            <div class="card">
+                                <div class="card-header" data-toggle="collapse"href="#FamilyData"
+                                    aria-expanded="true">
+                                    <h4>Family History</h4>
+                                </div>
+                                <div id="FamilyData" class="collapse show">
+                                    <div class="card-body">
+                                        <div class="TableBox FamilyTable"> 
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Relation</th>
+                                                        <th>Year of Birth</th>
+                                                        <th>Conditions</th>
+                                                        <th>Death Year (If)</th>
+                                                        <th>Death Reason (If)</th> 
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let fam of familyList">
+                                                        <td>{{fam.name}}</td>
+                                                        <td>{{fam.relation}}</td>
+                                                        <td>{{fam.birthYear}}</td>
+                                                        <td><span *ngFor="let para of fam.subparametersname">{{para.name}},</span>  </td>
+                                                        <td>{{fam.deathYear}}</td>
+                                                        <td>{{fam.causesOfDeath}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="Document">
+                    <div class="AppointmentDeatils">
+                        <div id="accordionDocument">
+                            <div class="card">
+                                <div class="card-header" data-toggle="collapse"href="#DocumentUpload"
+                                    aria-expanded="true">
+                                    <h4>Upload Document</h4>
+                                </div>
+                                <div id="DocumentUpload" class="collapse show">
+                                    <div class="card-body">
+                                      <div class="row p-2">
+                                        <div class="col-12">
+                                          <div class="form-group">
+                                            <label for="fileInput" class="form-label">Select File</label>
+                                            <input type="file" id="fileInput" class="form-control-file" (change)="onFileSelected($event)" />
+                                          </div>
+                                        </div>
+                                        <div class="col-12">
+                                          <div class="form-group">
+                                            <label for="commentInput" class="form-label">Comment</label>
+                                            <input type="text" id="commentInput" class="form-control" [(ngModel)]="comment" />
+                                          </div>
+                                        </div>
+                                        <div class="col-12">
+                                          <button class="btn btn-primary mt-2" (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
+                                        </div>
+                                        <div class="col-12">
+                                          <div *ngIf="uploadProgress > 0" class="mt-3">
+                                            <div class="progress">
+                                              <div class="progress-bar" role="progressbar" [style.width.%]="uploadProgress">{{ uploadProgress }}%</div>
+                                            </div>
+                                          </div>
+                                          <div *ngIf="uploadSuccess === true" class="alert alert-success mt-3">
+                                            Upload successful!
+                                          </div>
+                                          <div *ngIf="uploadSuccess === false" class="alert alert-danger mt-3">
+                                            Upload failed: {{ uploadError }}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+
+                            <div id="accordionAllDocument">
+                                <div class="card">
+                                    <div class="card-header" data-toggle="collapse"href="#FamilyData"
+                                        aria-expanded="true">
+                                        <h4>All Documents</h4>
+                                    </div>
+                                    <div id="FamilyData" class="collapse show">
+                                        <div class="card-body p-4">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr><th>Name</th><th>Comments</th><th>View</th></tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let doc of allMyFiles">
+                                                                <td>
+                                                                    <label>{{doc.name}}</label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>{{doc.comment}}</label>
+                                                                </td>
+                                                                <td>
+                                                                    <a target="_blank" href="{{doc.url}}">View</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div class="modal" id="DeathReasonModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="Decline Reason">
+                        <a href="JavaScript:Void(0);" data-dismiss="modal" class="CloseModal">×</a>
+                        <h3>Conditions</h3>
+                        <p>
+                            High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity
+                        </p>
+                         
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>    
+</div> 
+
+<div class="ModalBox">
+    <div class="modal" id="MedicationModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="MedicationBox">
+                    <div class="MedicationSelect">
+                        <aside>
+                            <form [formGroup]="otpForm" action="">
+                                <div class="Search">
+                                    <span><img src="assets/images/Search.svg" /></span>
+                                    <input formControlName="searchText"  type="text"
+                                        class="form-control" placeholder="Search and Select {{selectedPara?.name}}">
+                                </div>
+                                <div class="SelectBox">
+                                    <label class="CheckBox" *ngFor="let item of subParameterList">{{item.name}}
+                                        <input type="checkbox" (input)="onInputCheckChage(item)"
+                                            [checked]="item.isSelected">
+                                        <span class="Checkmark"></span>
+                                    </label>
+
+                                </div>
+                                <button id="Medicateopen" class="Button" (click)="onNextSubParameters()">Next </button>
+                            </form>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

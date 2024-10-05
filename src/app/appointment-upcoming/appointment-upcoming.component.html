@@ -1,0 +1,111 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Upcoming Appointment</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Upcoming Appointments</a></li>
+            </ul>
+        </div> 
+        
+        <div class="CommonArea">
+            <div class="TableList">
+
+                <div class="TableHead">
+                    <form  [formGroup]="otpForm" action="">
+                        <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                        <input  formControlName="searchText" (input)="onSearch()" type="text" placeholder="Search">
+                    </form>
+                </div>
+
+                <div class="Tablescroll">
+                    <table class="table">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Image</th>
+                            <th>Doctor Name</th>
+                            <th>Speciality</th>
+                            <th>Date & Time</th>
+                            <th>Zoom Link</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr *ngFor="let app of appointmetmentList; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>
+                                <figure><img src="{{app.doctorDetails?.profilePic}}" alt=""></figure>
+                            </td>
+                            <td>{{app.doctorDetails?.designation}} {{app.doctorDetails?.firstName}} {{app.doctorDetails?.lastName}}</td>
+                            <td>{{app.doctorDetails?.department}}</td>
+                            <td>{{getTime(app?.date)}}, {{app?.slotDetails?.startCombine}}-{{app?.slotDetails?.endCombine}}</td>
+                            <td>
+                                <a href="javascript:void(0);" (click)="onOpen(app?.meetingLink)" class="Zoom">{{app?.meetingLink}}</a>
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" class="View" (click)="onView(app)" >
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                    View Details
+                                </a>
+                            </td>
+                        </tr>  
+                    </table>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+<div class="ModalBox">
+    <div class="modal ModalCenter" id="DetailsModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="DoctorConsult">
+                    <div class="DoctorHead">
+                        <figure>
+                            <img src="{{selectedApp?.doctorDetails?.profilePic}}" alt="">
+                            <span></span>
+                        </figure>
+                        <figcaption>
+                            <h3>{{selectedApp.doctorDetails?.designation}} {{selectedApp?.doctorDetails?.firstName}} {{selectedApp?.doctorDetails?.lastName}}</h3>
+                            <h5>{{selectedApp.doctorDetails?.department}} </h5>
+                            <p><i class="fa fa-star"></i> <strong>{{selectedApp.doctorDetails?.avgRating}}</strong> <span>({{selectedApp.doctorDetails?.avgRating}} Feedback)</span></p>
+                            
+                            <h6 data-dismiss="modal"> Upcoming</h6>
+                            
+                        </figcaption>
+                    </div>
+
+                    <div class="DoctorBody">
+                        <aside>
+                            <h4>
+                                <img src="assets/images/calender.svg" alt="">
+                                Consult Time
+                            </h4>
+                            <h5>{{getTime(selectedApp.date)}}</h5>
+                            <h5>{{selectedApp?.slotDetails?.startCombine}} {{selectedApp?.slotDetails?.endCombine}}</h5>
+                            <!-- <h5>Live chat consult : $45 / visit</h5> -->
+                        </aside>
+                        <aside>
+                            <h4>
+                                <img src="assets/images/chain.svg" alt="">
+                                <a href="javascript:void(0);" (click)="onOpen(selectedApp?.meetingLink)">{{selectedApp.meetingLink}}</a>
+                            </h4>
+                            <p>When it is time for your appointment Please follow the link provided and then be allowed into the visit</p>
+                        </aside>
+                    </div>
+
+                    <div class="DoctorFooter">
+                        <h5>A text message and email message with the appointment link will also be sent</h5>
+                        <p>*Please try to join the appointment a few minutes early if you are more than 5 minutes late to your appointment, your appointment will be canceled and you will forfeit your appointment fee. Please press CONFIRM now to agree with the conditions and the appointment time. Payment will be taken once appointment is confirmed Or Canceled to cancel it.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

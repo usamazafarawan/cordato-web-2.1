@@ -1,0 +1,290 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Subscription</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Manage Subscription</a></li>
+            </ul>
+        </div>
+        
+        <!-- <div class="SubscriptionPlan" *ngIf="SubscriptionBox">
+            <article>
+                <aside>
+                    <h6>{{subData.interval_count<2?'':subData.interval_count}}{{' '}}{{subData.interval?subData.interval:'year'}} plan </h6>
+                    <h3>${{subData?.monthlyPaid}}<span>user/month</span></h3>
+                    <h3>${{subData?.yearlyCost}}<span>{{subData.interval_count<2?'':subData.interval_count}}{{' '}}{{subData.interval?subData.interval:'year'}}</span></h3>
+                </aside>
+                <ul>      
+                    <li *ngIf="subData?.accessOtherDash">
+                        <span><img src="assets/images/check.svg"></span>
+                        Access to your family Dashboard</li>
+                    <li *ngIf="subData?.healthDashboard"><span><img src="assets/images/check.svg"></span>
+                        Health Dashboard</li>
+                    <li *ngIf="subData?.virtualDoc"><span><img src="assets/images/check.svg"></span>
+                        Virtual Doc</li>
+
+                    <li *ngIf="subData?.mentalHealth"><span><img src="assets/images/check.svg"></span>
+                        Mental Health</li>
+                    <li *ngIf="subData?.counseling"><span><img src="assets/images/check.svg"></span>
+                        Counseling</li>
+                    <li *ngIf="subData?.psychiatric"><span><img src="assets/images/check.svg"></span>
+                        Psychiatric</li>
+
+                    <li *ngIf="subData?.analaytics"><span><img src="assets/images/check.svg"></span>
+                        Analytics</li>
+                    <li *ngIf="subData?.checkin"><span><img src="assets/images/check.svg"></span>
+                        Check-In</li>
+                    <li *ngIf="subData?.earnRewards"><span><img src="assets/images/check.svg"></span>
+                        Earn Rewards</li>
+                    <li *ngIf="subData?.healthAlert"><span><img src="assets/images/check.svg"></span>
+                        Predictive Health Monitoring and Alerting</li>
+                </ul>
+            </article>
+
+            <div class="SubscriptionButton">
+                <a class="Button" (click)="ShowSubscriptionBox()">Upgrade Plan</a>
+                <a class="Button" data-toggle="modal" data-target="#PlanModal">Extend Plan</a>
+                <a class="Button" [routerLink]="['/manage-account-genrate']">Genrate Sub Plan Code</a>
+            </div>  
+        </div> -->  
+        
+
+        <div class="PlanArea"> 
+            <div *ngFor="let sub of subscriptionList">
+                <div class="PlanBox"   *ngIf="sub.interval_count==1">
+                
+                    <div class="PlanHead">
+                        <h4>{{sub.name}}</h4>
+                        <!-- <h3>${{sub.monthlyPaid}} <span>user/month</span></h3> -->
+                    </div>
+                    <ul>
+                        <li *ngIf="sub.accessOtherDash">Access to your family Dashboard</li>
+                        <li *ngIf="sub.healthDashboard">Health Dashboard</li>
+                        <li *ngIf="sub.virtualDoc">Virtual Doc</li>
+
+                        <li *ngIf="sub.mentalHealth">Mental Health</li>
+                        <!-- <li *ngIf="sub.counseling">Counseling</li>
+                        <li *ngIf="sub.psychiatric">Psychiatric</li> -->
+
+                        <li *ngIf="sub.analaytics">Analytics</li>
+                        <li *ngIf="sub.checkin">Check-In</li>
+                        <li *ngIf="sub.earnRewards">Earn Rewards</li>
+                        <li *ngIf="sub.healthAlert">Predictive Health Monitoring and Alerting</li>
+                    </ul>
+
+                    <p *ngIf="sub.yearlyCost!=0">
+                        <a  (click)="onPayPoint(sub)" href="javascript:void(0);" class="Start" >
+                            Pay with Point
+                        </a>
+                    </p>
+
+                    <button (click)="onPayment(sub)" *ngIf="loginData.subscriptionId!=sub.id" class="Start" >
+                        Paid ${{sub.yearlyCost}}/{{sub.interval_count<2?'':sub.interval_count}}{{' '}}{{sub.interval?sub.interval:'year'}}
+                    </button>
+                </div>
+            </div> 
+        </div> 
+
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div class="modal" id="PlanModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="Category">
+                    <a class="CloseModal" data-dismiss="modal" href="JavaScript:Void(0);">×</a>
+                    <h3>Extend Plan</h3> 
+                    <form [formGroup]="formGroup">
+                        <div class="row"> 
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Plan</label>
+                                    <select  readonly formControlName="rewardsSubId"  class="form-control">
+                                        <option>Select Plan</option>
+                                        <option *ngFor="let item of planData" value="{{item._id}}" >{{item.plan}} Month</option>
+                                    </select>
+                                </div>
+                                <div class="text-danger"
+                                    *ngIf="(formGroup.get('rewardsSubId')?.hasError('required') && (formGroup.get('rewardsSubId')?.dirty))|| (formInvalid && !this.formGroup.value.rewardsSubId)">
+                                    *Plan is required
+                               </div>
+                            </div>
+        
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Required Rewards</label>
+                                    <input readonly type="text"  class="form-control" placeholder="" value="{{getValue()}}"> 
+                                </div>
+                            </div> 
+                            
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button class="Button" (click)="onSubmit()">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+
+<!-- 
+<div id="PlanList">
+    <article>
+        <label class="Radio"> 
+            <input type="radio" name="card" > 
+            <span class="Radiomark"></span>
+        </label>
+        <aside>
+            <h6>1 Months Plan</h6>
+            <h3>$150<span>user/month</span></h3>
+        </aside>
+        <ul>      
+            <li>
+                <span><img src="assets/images/check.svg"></span>
+                Cover 1 adult
+            </li>
+            <li>
+                <span><img src="assets/images/check.svg"></span>
+                Unlimited consultant
+            </li>
+            <li>
+                <span><img src="assets/images/check.svg"></span>
+                Doctor available to chat, voice & video call
+            </li>
+            <li>     
+                <span><img src="assets/images/check.svg"></span>
+                Doctor available to chat, voice & video call
+            </li>
+        </ul>
+    </article>
+
+    <article>
+        <label class="Radio"> 
+            <input type="radio" name="card" > 
+            <span class="Radiomark"></span>
+        </label>
+        <aside>
+            <h6>6 Months Plan</h6>
+            <h3>$150<span>user/month</span></h3>
+        </aside>
+        <ul>      
+            <li>
+                <span><img src="assets/images/check.svg"></span>
+                Cover 1 adult
+            </li>
+            <li>
+                <span><img src="assets/images/check.svg"></span>
+                Unlimited consultant
+            </li>
+            <li>
+                <span><img src="assets/images/check.svg"></span>
+                Doctor available to chat, voice & video call
+            </li>
+            <li>     
+                <span><img src="assets/images/check.svg"></span>
+                Doctor available to chat, voice & video call
+            </li>
+        </ul>
+    </article>
+
+    <article>
+        <label class="Radio"> 
+            <input type="radio" name="card" > 
+            <span class="Radiomark"></span>
+        </label>
+        <aside>
+            <h6>1 Year Plan</h6>
+            <h3>$150<span>user/month</span></h3>
+        </aside>
+        <ul>      
+            <li>
+                <span><img src="assets/images/check.svg"></span>
+                Cover 1 adult
+            </li>
+            <li>
+                <span><img src="assets/images/check.svg"></span>
+                Unlimited consultant
+            </li>
+            <li>
+                <span><img src="assets/images/check.svg"></span>
+                Doctor available to chat, voice & video call
+            </li>
+            <li>     
+                <span><img src="assets/images/check.svg"></span>
+                Doctor available to chat, voice & video call
+            </li>
+        </ul>
+    </article>
+    <a class="Button" id="Update" href="javascript:void(0);">Update</a>
+</div>
+
+<div class="ModalBox">
+    <div class="modal" id="CardModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="Category">
+                    <a class="CloseModal" data-dismiss="modal" href="JavaScript:Void(0);">×</a>
+                    <h3>Edit Card Details</h3>
+
+                    
+                        <div class="row"> 
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter Your Name">
+                                </div>
+                            </div>
+        
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">Card Number</label>
+                                    <input type="text" class="form-control" placeholder="xxxx-xxxxx-xxxxx-xxxxx" value="1321-1165-5616-6451">
+                                    <span class="Icon"><img src="assets/images/master.svg"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Expiry</label>
+                                    <input type="text" class="form-control" placeholder="DD"> 
+                                </div> 
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">&nbsp;</label>
+                                    <input type="text" class="form-control" placeholder="YYYY"> 
+                                </div> 
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Zipcode</label>
+                                    <input type="text" class="form-control" placeholder="Enter Zipcode"> 
+                                </div> 
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Security Code</label>
+                                    <input type="text" class="form-control" placeholder="Enter Security Code"> 
+                                </div> 
+                            </div>
+                        </div>
+                        
+                  
+                </div>
+            </div>
+        </div>
+    </div>    
+</div> 
+
+  -->

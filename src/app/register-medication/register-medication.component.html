@@ -1,0 +1,76 @@
+<div class="LoginArea LoginReverse">
+    <div class="LoginLeft">
+        <aside>
+            <figure><img src="assets/images/Medication.svg" /></figure>
+            <h3>Lorem Ipsum is simply</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+        </aside>
+    </div>
+
+    <div class="LoginRight" style="padding: 60px 0;">
+        <aside>
+
+            <a [routerLink]="['/register-personal']" class="BackButton"><i class="fa fa-long-arrow-left"></i> Back</a>
+            <h5 class="Step">Step 4 of 7 </h5> 
+            <form action=""> 
+                <div class="Medication" *ngFor="let para of parameterList">
+                    <article> 
+                        <figure><img src="{{para.icon}}" /></figure>
+                        <h6>{{para.name}}</h6>
+                        <p>{{para.description}}</p>
+                    </article>
+                    <a class="MedicationOpen" href="javascript:void(0);" (click)="onSelectParameter(para)"> {{para.name}} </a> 
+                    
+                    <div class="MedicationList" *ngIf="para.selectedSubParameters && para.selectedSubParameters.subparametersname">
+                        <span *ngFor="let select of para.selectedSubParameters.subparametersname">
+                            {{select.name}} 
+                            <a href="javascript:void(0);" (click)="ondelete(select._id,para._id)">&times;</a>
+                        </span>
+
+                    </div>
+                    
+                </div>
+                 
+                <button (click)="onNextValue()">Next <img src="assets/images/next-arrow.svg" /></button>
+            </form>
+        </aside>
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div class="modal FullModal" id="MedicationModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="LoginArea">
+                    <div class="LoginLeft">
+                        <aside>
+                            <figure><img src="assets/images/Medication.svg" /></figure>
+                            <h3>Lorem Ipsum is simply</h3>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+                        </aside>
+                    </div>
+                
+                    <div class="LoginRight MedicationSelect">
+                        <aside>  
+                            <form   [formGroup]="otpForm" action=""> 
+ 
+                                <div class="Search">
+                                    <span><img src="assets/images/Search.svg" /></span>
+                                    <input formControlName="searchText" (input)="onSearch()" type="text" class="form-control" placeholder="Search and Select {{selectedPara?.name}}">
+                                </div>            
+                                <div class="SelectBox">
+                                    <label class="CheckBox" *ngFor="let item of subParameterList">{{item.name}}
+                                        <input type="checkbox" (input)="onInputCheckChage(item)" [checked]="item.isSelected">
+                                        <span class="Checkmark"></span>
+                                    </label>
+
+                                </div>
+                                <button id="Medicateopen" (click)="onNextSubParameters()">Next <img src="assets/images/next-arrow.svg" /> </button>
+                            </form>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

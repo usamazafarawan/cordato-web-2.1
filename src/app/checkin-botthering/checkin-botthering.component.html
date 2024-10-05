@@ -1,0 +1,32 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <form  [formGroup]="formGroup" class="CheckinArea">
+            <!-- <div class="CheckinTitle">
+                <h4>$ Free Health Dollar</h4>
+            </div>  -->
+
+            <div class="CommonArea">
+                <h1 class="Title">I’m sorry to hear that “User”</h1>
+                <div class="CommonHead">
+                    <figure>
+                        <img src="assets/images/reason-1.svg">
+                    </figure>
+                    <h5>What’s Bothering You?</h5> 
+                </div>  
+                <textarea  formControlName="whatBotheringYou" rows="7" class="form-control" placeholder="Write here..."></textarea>
+                <div class="text-danger"
+                    *ngIf="(formGroup.get('whatBotheringYou')?.hasError('required') && (formGroup.get('whatBotheringYou')?.dirty))|| (formInvalid && !this.formGroup.value.whatBotheringYou)">
+                    *Description is required
+                </div>
+            </div>
+  
+            <div class="CommonButon">
+                <button class="Button" (click)="onSave()">Save</button>
+            </div>
+        </form> 
+    </div>
+</div>

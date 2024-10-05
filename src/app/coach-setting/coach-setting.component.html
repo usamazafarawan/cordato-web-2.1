@@ -1,0 +1,32 @@
+<app-coach-header></app-coach-header>
+<div class="CoachCommonArea">
+	<div class="BreadcumBox">
+        <h5>Settings</h5>
+        <ul>
+            <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+            <li><a href="javascript:void(0);">Home </a></li>
+            <li><a href="javascript:void(0);">Settings</a></li>
+        </ul>
+    </div> 
+    
+    <div class="ButtonBox">
+		<button class="{{platform=='android'?'active':''}}" (click)="onselectPlatform('android')">Android</button>
+		<button class="{{platform=='iOS'?'active':''}}" (click)="onselectPlatform('iOS')">iOS</button>
+	</div>
+
+	<div class="CommonArea" *ngFor="let group of groupData">
+		<div class="CommonHead">
+			<figure>
+				<img src="assets/images/Vitals-1.svg">
+			</figure>
+			<h5>{{group.name}}</h5> 
+			<label  class="Switch">
+				<!-- <input  [queryParams]="{userId:item.friendDetails._id,groupId:item.group.groupId}" (click)="onClick(group)" type="checkbox" [checked]="group?.selectedGroup?.isSelected">
+				<span class="slider"></span> -->
+				<a class="view" [routerLink]="['/coach-personal-health']" [queryParams]="{userId:userId,groupId:group._id}">View all</a>
+			</label>
+		</div>  
+				  
+		 </div>
+
+	

@@ -1,0 +1,93 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+<div class="Main-wrapper">
+  <div class="Wrapper">
+
+    <div class="BreadcumBox">
+      <h5>All Sessions</h5>
+      <ul>
+        <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+        <li><a href="javascript:void(0);">Home </a></li>
+        <li><a href="javascript:void(0);">Payment gatway</a></li>
+      </ul>
+    </div>
+    <div class="Welcome PaymentWelcome">
+      <div class="cell example example1 paymentget" id="example-1">
+        <form [formGroup]="formGroup">
+          <fieldset>
+            <div class="form-group">
+              <label for="example1-name" data-tid="elements_examples.form.name_label">Name</label>
+              <input formControlName="name" id="example1-name" data-tid="elements_examples.form.name_placeholder"
+                type="text" placeholder="Name" required="" autocomplete="name">
+            </div>
+            <div class="text-danger"
+              *ngIf="(formGroup.get('name')?.hasError('required') && (formGroup.get('name')?.dirty))|| (formInvalid && !this.formGroup.value.name)">
+              *Name is required
+            </div>
+
+            <div class="form-group">
+              <label for="example1-email" data-tid="elements_examples.form.email_label">Email</label>
+              <input formControlName="email" id="example1-email" data-tid="elements_examples.form.email_placeholder"
+                type="email" placeholder="Email" required="" autocomplete="email">
+            </div>
+            <div class="text-danger"
+              *ngIf="(formGroup.get('email')?.hasError('required') && (formGroup.get('email')?.dirty))|| (formInvalid && !this.formGroup.value.email)">
+              *Email is required
+            </div>
+            <div class="text-danger"
+              *ngIf="(formGroup.get('email')?.hasError('pattern') && (formGroup.get('email')?.dirty))">
+              *Please enter valid email id
+            </div>
+
+            <div class="form-group">
+
+              <label for="example1-phone" data-tid="elements_examples.form.phone_label">Phone</label>
+              <input formControlName="phoneNumber" id="example1-phone"
+                data-tid="elements_examples.form.phone_placeholder" type="tel" placeholder="Phone Number" required=""
+                autocomplete="tel">
+
+            </div>
+            <div class="text-danger"
+              *ngIf="(formGroup.get('phoneNumber')?.hasError('required') && (formGroup.get('phoneNumber')?.dirty))|| (formInvalid && !this.formGroup.value.phoneNumber)">
+              *Phone is required
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="form-group">
+              <label for="example1-phone" data-tid="elements_examples.form.phone_label">Card Number</label>
+              <div class="PaymentInputBox">
+                <input id="cc-number" formControlName="creditCard" type="tel" autocomplete="cc-number" placeholder="Card Number" ccNumber>
+                <input id="cc-exp-date" formControlName="expirationDate" type="tel" autocomplete="cc-exp" placeholder="Expiration" ccExp>
+                <input id="cc-cvc" formControlName="cvc" type="tel" autocomplete="off"  ccCvc placeholder="CVV">
+              </div>
+              <div class="text-danger"
+              *ngIf="(formGroup.get('creditCard')?.hasError('required') && (formGroup.get('creditCard')?.dirty))|| (formInvalid && !this.formGroup.value.creditCard)">
+              *Card is required
+            </div>
+            <div class="text-danger"
+            *ngIf="(formGroup.get('expirationDate')?.hasError('required') && (formGroup.get('expirationDate')?.dirty))|| (formInvalid && !this.formGroup.value.expirationDate)">
+            *Expiration is required
+          </div>
+          <div class="text-danger"
+          *ngIf="(formGroup.get('cvc')?.hasError('required') && (formGroup.get('cvc')?.dirty))|| (formInvalid && !this.formGroup.value.cvc)">
+          *Cvv is required
+        </div>
+              <!-- <div class="paycard">
+                 
+                <div id="example1-card"></div> 
+                 <div class="form-group"> 
+                 <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+                </div> 
+                <input id="cc-number" formControlName="creditCard" type="tel" autocomplete="cc-number" ccNumber>
+                <input id="cc-exp-date" formControlName="expirationDate" type="tel" autocomplete="cc-exp" ccExp>
+                <input id="cc-cvc" formControlName="cvc" type="tel" autocomplete="off" ccCvc>
+              </div> -->
+            </div>
+          </fieldset>
+          <button type="button" (click)="createToken()" class="paybtn" data-tid="elements_examples.form.pay_button">Pay ${{subData?.yearlyCost}}</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

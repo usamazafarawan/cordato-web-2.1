@@ -1,0 +1,81 @@
+<div class="LoginArea LoginReverse">
+    <div class="LoginLeft">
+        <aside>
+            <figure><img src="assets/images/register-profile.svg" /></figure>
+            <h3>Lorem Ipsum is simply</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+        </aside>
+    </div>
+
+    <div class="LoginRight">
+        <aside>
+            <a [routerLink]="['/register-setpassword']" class="BackButton"><i class="fa fa-long-arrow-left"></i> Back</a>
+            <h5 class="Step">Step 2 of 7 </h5>
+
+            <h1>Setup Your Profile</h1>
+            <h6>Update your profile to get better the answer <br>
+                from doctor.</h6>
+
+            <form action="" [formGroup]="formGroup">
+                <div class="form-group">
+                    <label for="">First Name</label>
+                    <input formControlName="firstName" type="text" class="form-control" placeholder="Enter First Name">
+                </div>
+                <div class="text-danger"
+                    *ngIf="(formGroup.get('firstName')?.hasError('required') && (formGroup.get('firstName')?.dirty))|| (formInvalid && !this.formGroup.value.firstName)">
+                    *First Name is required
+                </div>
+
+                <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input formControlName="lastName" type="text" class="form-control" placeholder="Enter Last Name">
+                </div>
+                <div class="text-danger"
+                    *ngIf="(formGroup.get('lastName')?.hasError('required') && (formGroup.get('lastName')?.dirty))|| (formInvalid && !this.formGroup.value.lastName)">
+                    *Last Name is required
+                </div>
+
+                <div class="form-group">
+                    <div class="Gender">
+                        <input value="Male" formControlName="gender" type="radio" name="gender">
+                        <figure>
+                            <img src="assets/images/Male.svg">
+                        </figure>
+                        <span>Male</span>
+                    </div>
+
+                    <div class="Gender">
+                        <input  value="Female" formControlName="gender" type="radio" name="gender">
+                        <figure>
+                            <img src="assets/images/Female.svg">
+                        </figure>
+                        <span>Female</span>
+                    </div>
+                </div>
+                <div class="text-danger"
+                    *ngIf="(formGroup.get('gender')?.hasError('required') && (formGroup.get('gender')?.dirty))|| (formInvalid && !this.formGroup.value.gender)">
+                     *Gender is required
+                </div>
+                
+                <div class="form-group">
+                    <label for="">Birthday</label>
+                    <!-- <input formControlName="dob" type="date" class="form-control"> --> 
+                     <input formControlName="dob" type="text"
+            class="form-control" 
+            #dp="bsDatepicker"
+            bsDatepicker [(bsValue)]="myDateValue">
+            <span class="Icon"><i class="fa fa-calendar" aria-hidden="true"></i> </span>
+                </div>
+                 
+                <div class="text-danger"
+                    *ngIf="(formGroup.get('dob')?.hasError('required') && (formGroup.get('dob')?.dirty))|| (formInvalid && !this.formGroup.value.dob)">
+                    *DOB is required
+                </div>
+
+                <button (click)="onSave()">Next <img src="assets/images/next-arrow.svg" /></button>
+            </form>
+ 
+        </aside>
+    </div>
+
+</div>

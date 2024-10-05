@@ -1,0 +1,43 @@
+<app-coach-header></app-coach-header>
+
+<div class="PeopleHealthArea">  
+    <div class="PeopleHealthBox" *ngFor="let item of myFriendList">
+        <div class="PeopleHealthLeft">
+            <figure>
+                <img src="{{item?.friendDetails?.profilePic}}">
+            </figure>
+            <figcaption>
+                <h5><a [routerLink]="['/coach-personal-details']" [queryParams]="{userId:item.friendDetails._id,groupId:item.group.groupId}">{{item?.friendDetails?.firstName}} {{item?.friendDetails?.lastName}}</a></h5>
+                <h6><i class="fa fa-phone"></i> {{item?.friendDetails?.mobileNumber}}</h6>
+                <p><a [routerLink]="['/coach-setting']" [queryParams]="{userId:item.friendDetails._id,groupId:item.group.groupId}">{{item?.group?.groupsDetails?.name}}</a></p>
+                <a class="view" [routerLink]="['/coach-personal-health']" [queryParams]="{userId:item.friendDetails._id,groupId:item.group.groupId}">View all</a>
+            </figcaption>
+        </div>
+        <div class="PeopleHealthRight">
+            <ul>
+                <li *ngFor="let para of getParaMeters(item.parameters)">
+                    <div class="HeartRate">
+                        <h3>{{para?.parameters?.name}}</h3>
+                        <div class="HeartRateBox">
+                            <h4>{{para?.diffrence}}</h4>
+                            <article>
+                                <aside>
+                                    <p>Today</p>
+                                    <span>{{para?.todayShow}}</span>
+                                </aside>
+                                <aside>
+                                    <p>Average</p>
+                                    <span>{{para?.monthShow}}</span>
+                                </aside>
+                            </article>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div> 
+    
+  
+
+   
+</div>

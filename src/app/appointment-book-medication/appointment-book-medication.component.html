@@ -1,0 +1,89 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Book Appointment</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a [routerLink]="['/dashboard']">Home </a></li>
+                <li><a [routerLink]="['/appointment-book']">Book Appointment</a></li>
+                <li><a [routerLink]="['/appointment-book-mdication']">Medication</a></li> 
+            </ul>
+            <p>Step 2 of 5</p>
+        </div> 
+        
+        <div class="CommonArea">
+            <div class="CommonHead">
+                 &nbsp;  
+            </div>   
+                      
+            <div class="CommonBody">
+                <div class="row">
+                    <div class="col-sm-6 MedicationParameter" *ngFor="let para of parameterList">
+                        <div class="Medication">
+                            <article>
+                                <figure><img src="{{para.icon}}" /></figure>
+                                <h6>{{para.name}}</h6>
+                                <p>{{para.description}}</p>
+                            </article>
+                            <a class="MedicationOpen" href="javascript:void(0);" (click)="onSelectParameter(para)"> Select {{para.name}} </a> 
+                            <div class="MedicationList" style="display: block;" *ngIf="para.selectedSubParameters && para.selectedSubParameters.subparametersname">
+                                <span *ngFor="let select of para.selectedSubParameters.subparametersname">
+                                    {{select.name}} 
+                                    <a href="javascript:void(0);" (click)="ondelete(select._id,para._id)">&times;</a>
+                                </span>
+                               
+                            </div> 
+                             
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-4">
+                        <div class="Medication SurgeryMedication">
+                            <h5>Recent Surgery ?</h5>
+                            <input type="text" class="form-control" placeholder="What was the surgery for ?" > 
+                        </div>
+                    </div> 
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="CommonButon">
+            <button class="Button" (click)="onNext()"> Next <img src="assets/images/next-arrow.svg" /></button>
+        </div>
+
+    </div>
+</div>
+
+<div class="ModalBox">
+    <div class="modal" id="MedicationModal">
+        <div class="modal-dialog">
+            <div class="modal-content"> 
+                <div class="MedicationBox">
+                    <div class="MedicationSelect">
+                        <aside>  
+                            <form action="" [formGroup]="otpForm" > 
+                                <div class="Search">
+                                    <span><img src="assets/images/Search.svg" /></span>
+                                    <input formControlName="searchText" (input)="onSearch()" type="text" class="form-control" placeholder="Search and Select Medication">
+                                </div>            
+                                <div class="SelectBox">
+                                    <label class="CheckBox" *ngFor="let item of subParameterList">{{item.name}}
+                                        <input type="checkbox" (input)="onInputCheckChage(item)" [checked]="item.isSelected">
+                                        <span class="Checkmark"></span>
+                                    </label>
+
+                                </div>
+                                <button id="Medicateopen" class="Button" (click)="onNextSubParameters()">Next </button>
+                            </form>
+                        </aside>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

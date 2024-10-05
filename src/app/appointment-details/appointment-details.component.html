@@ -1,0 +1,431 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>Past Appointments</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a href="javascript:void(0);">Past Appointments Details</a></li>
+            </ul>
+        </div> 
+        
+        <div class="AppointmentDeatils">
+            <div id="accordion">
+                <div class="CommonArea DoctorDetails">   
+                    <div class="CommonBody">
+                        <div class="DoctorConsult ">
+                            <div class="DoctorHead">
+                                <figure>
+                                    <img src="{{appointmetmentData?.doctorDetails?.profilePic}}" alt="">
+                                </figure>
+                                <figcaption>
+                                    <h3>{{appointmetmentData?.doctorDetails?.designation}} {{appointmetmentData?.doctorDetails?.firstName}} {{appointmetmentData?.doctorDetails?.lastName}}</h3>
+                                    <h5>{{appointmetmentData?.doctorDetails?.department}} </h5>
+                                    <p *ngIf="appointmetmentData"><i class="fa fa-star"></i> <strong>{{appointmetmentData?.doctorDetails?.avgRating}}</strong> <span data-toggle="modal" data-target="#FeedbackModal" (click)="onGetRating()">({{appointmetmentData?.doctorDetails?.reviewCount}} reviews)</span></p>
+                                </figcaption>
+                            </div>
+        
+                            <div class="DoctorBody">
+                                <aside>
+                                    <h4>
+                                        <img src="assets/images/calender.svg" alt="">
+                                        Consult Time
+                                    </h4>
+                                    <h5>{{getTime(appointmetmentData?.date)}}</h5>
+                                    <h5>{{appointmetmentData?.slotDetails?.startCombine}}-{{appointmetmentData?.slotDetails?.endCombine}}</h5>
+                                    <!-- <h5>Live chat consult : $45 / visit</h5> -->
+                                </aside>
+                                <!-- <aside> 
+                                    <h5>DX:  {{appointmetmentData?.appdiagnosisordsDetails?.orderCommmnet}}</h5>
+                                    <h5>RX:  Medicine 1 x 1 week</h5> 
+                                </aside> -->
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" data-toggle="collapse" href="#collapseOne" aria-expanded="true">
+                        <h4>Reason for Visit</h4>
+                    </div>
+                    <div id="collapseOne" class="collapse show">
+                        <div class="card-body">
+                            <div class="TableBox">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Issue</th>
+                                        <th>{{appointmetmentData?.reasonForVisit}}</th>
+                                    </tr>
+                                    <tr *ngIf="appointmetmentData.image">
+                                        <td>
+                                            <strong>Doc</strong>
+                                        </td>
+                                        <td>
+                                            <img src="appointmetmentData.image[0]" alt="">
+                                            <i>{{getFileName(appointmetmentData.image[0])}}</i>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" *ngIf="appointmetmentData.symptomsDetails && appointmetmentData.symptomsDetails.length">
+                    <div class="card-header" data-toggle="collapse" href="#collapseTwo" aria-expanded="true">
+                        <h4>Symptoms</h4>
+                    </div>
+                    <div id="collapseTwo" class="collapse show">
+                        <div class="card-body">
+                            <div class="Symptomsappointment">
+                                <div class="SymptomsLeft">
+                                    <div class="TableBox">
+                                        <table class="table table-striped"> 
+                                            <tr *ngFor="let sym of appointmetmentData.symptomsDetails; let i =index"> 
+                                                <td>Symptoms#{{i+1}}</td>
+                                                <td>{{sym.symptoms}}</td>
+                                            </tr>
+                                          
+                                        </table>
+                                    </div> 
+                                </div>
+                                <div class="SymptomsRight"  style="width: 50%;">
+                                    <!-- Progress bar green -->
+                                    <div  *ngFor="let sym of appointmetmentData.symptomsDetails; let ind=index" >
+                                        <aside *ngIf="sym.severity==1" class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10)</p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 10%;background-color: rgb(29 161 242 / 10%);"></div>
+                                            </div>
+                                        </aside> 
+                                        <aside  *ngIf="sym.severity==2" class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10)</p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 20%;background-color:rgb(86 224 224 / 20%);"></div>
+                                            </div>
+                                        </aside> 
+                                        <aside  *ngIf="sym.severity==3" class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10)</p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 30%;background-color:rgb(86 224 224 / 30%);"></div>
+                                            </div>
+                                        </aside> 
+                                        <aside *ngIf="sym.severity==4" class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10) </p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 40%;background-color:rgb(86 224 224 / 40%);"></div>
+                                            </div>
+                                        </aside> 
+                                        <aside *ngIf="sym.severity==5" class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10)</p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 50%;background-color:rgb(86 224 224 / 60%);"></div>
+                                            </div>
+                                        </aside> 
+                                        <aside  *ngIf="sym.severity==6" class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10)</p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 60%;background-image:linear-gradient(90deg,#71d1d1,#ee9a96);"></div>
+                                            </div>
+                                        </aside> 
+                                        <aside *ngIf="sym.severity==7" class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10)</p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 70%;background-color:rgb(221 53 46 / 50%);"></div>
+                                            </div>
+                                        </aside> 
+    
+                                        <aside *ngIf="sym.severity==8" class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10)</p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 80%;background-color:rgb(221 53 46 / 60%);"></div>
+                                            </div>
+                                        </aside> 
+    
+                                        <aside *ngIf="sym.severity==9"class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10)</p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 90%;background-color:rgb(221 53 46 / 70%);"></div>
+                                            </div>
+                                        </aside> 
+    
+                                        <aside *ngIf="sym.severity==10" class="progress-bar--wrap">
+                                            <p>Severity ({{sym.severity}}/10)</p>
+                                            <div class="ProgressBar">
+                                                <div class="progress-bar--inner" style="width: 100%;background-color:#DD352E;"></div>
+                                            </div>
+                                        </aside> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" *ngIf="appointmetmentData.image">
+                    <div class="card-header" data-toggle="collapse" href="#collapseThree" aria-expanded="true">
+                        <h4>Location of Any Discomfort</h4>
+                    </div>
+                    <div id="collapseThree" class="collapse show">
+                        <div class="card-body">
+                            <div class="TableBox">
+                                <table class="table"> 
+                                    <tr> 
+                                        <td>
+                                            <img src="appointmetmentData.image[0]" alt="">
+                                            <i>{{getFileName(appointmetmentData.image[0])}}</i>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" >
+                    <div class="card-header" data-toggle="collapse" href="#ECGOne" aria-expanded="true">
+                        <h4>Insurance Policy</h4>
+                    </div>
+                    <div id="ECGOne" class="collapse show">
+                        <div class="card-body">
+                            <div class="ECGBox">
+                                <aside>
+                                    <img src="assets/images/pdf.svg">
+                                    <em>{{getFileName(appointmetmentData.insuranceCard)}}</em>
+                                                <a href="javascript:void(0);" (click)="onOpen(appointmetmentData.insuranceCard)">Download</a>
+                                </aside>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" data-toggle="collapse" href="#collapseFour" aria-expanded="true">
+                        <h4>Reported Vitals</h4>
+                    </div>
+                    <div id="collapseFour" class="collapse show">
+                        <div class="card-body">
+                            <div class="TableBox">
+                                <table class="table">
+                                    <tr>
+                                        <th>Temp</th>
+                                        <th>Pulse</th>
+                                        <th>Weight</th>
+                                        <th>Height</th>
+                                        <th>BP</th>
+                                        <th>ECG</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{appointmetmentData?.temprature}}</td>
+                                        <td>{{appointmetmentData?.pulse}}</td>
+                                        <td>{{appointmetmentData?.weight}}</td>
+                                        <td>{{appointmetmentData?.height}}</td>
+                                        <td>{{appointmetmentData?.systolic}}-{{appointmetmentData?.diastolic}}</td>
+                                        <td>{{appointmetmentData.ecg?'Yes':'No'}}</td>
+                                    </tr> 
+                                </table>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" data-toggle="collapse" href="#collapseSix" aria-expanded="true">
+                        <h4>Previous Interaction</h4>
+                        <a [routerLink]="['/previous-interaction']" class="More">View More</a>
+                    </div>
+                    <div id="collapseSix" class="collapse show">
+                        <div class="card-body">
+                            <div class="TableBox">
+                                <table class="table">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Reason</th>
+                                        <th>Main Symptoms</th>
+                                        <!-- <th>DX</th>
+                                        <th>RX</th> -->
+                                        <th>Feeling Better</th>
+                                        <th>Time to Recovery</th>
+                                        <th></th>
+                                    </tr>  
+                                    <tr *ngFor="let item of appointmetmentData.lastfourappointmnet">
+                                        <td>{{getDateFormat(item.date)}}</td>
+                                        <td>{{item.reasonForVisit}}</td>
+                                        <td>
+                                            <span *ngIf="item  && item.symptomsDetails && item.symptomsDetails.length>0 "> {{item.symptomsDetails[0].symptoms}} </span> 
+                                            <span *ngIf="item  && item.symptomsDetails && item.symptomsDetails.length==0"> NA </span> 
+                                        
+                                        </td>
+                                        <td class="text-danger">{{item.feelingBetterDays?item.feelingBetterDays:0}} {{!item.feelingBetterDays?'':item.feelingBetterDays<2?"Day":"Days"}}</td>
+                                        <!-- <td>Strep </td>
+                                        <td>Ammaxicilan </td> -->
+                                        <td class="text-danger">{{item.recoveredDays?item.recoveredDays:0}} {{!item.recoveredDays?'':item.recoveredDays<2?"Day":"Days"}}</td>
+                                        <td><a [queryParams]="{ appId:item._id}" [routerLink]="['/appointment-details']" class="btns details">Details</a></td>
+                                    </tr>
+
+                                </table>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" *ngFor="let para  of appointmetmentData?.parameters; let i=index">
+                    <div class="card-header" data-toggle="collapse" attr.href="#collapseSeven{{i}}" aria-expanded="true">
+                        <h4>{{para?.parameter?.name}}</h4>
+                    </div>
+                    <div id="collapseSeven{{i}}" class="collapse show">
+                        <div class="card-body">
+                            <div class="TableBox">
+                                <table class="table table-striped" >
+                                    <tr *ngFor="let sub of para?.selectedsubparameters; let in=index">
+                                        <td>
+                                            <strong>{{sub?.name}}</strong>
+                                        </td>
+                                        <!-- <td>N/A</td> -->
+                                    </tr> 
+                                   
+                                </table>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" data-toggle="collapse" href="#Diagnosis" aria-expanded="true">
+                        <h4>Diagnosis</h4>
+                    </div>
+                    <div id="Diagnosis" class="collapse show">
+                        <div class="card-body">
+                            <div class="TableBox CommentTable">
+                                <table class="table ">
+                                    <tr>
+                                        <th>Comment</th>
+                                        <td>{{appointmetmentData.appdiagnosisordsDetails && appointmetmentData.appdiagnosisordsDetails.orderCommmnet?appointmetmentData.appdiagnosisordsDetails.orderCommmnet:'NA'}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="TableBox DiagnosisTable">
+                                <table class="table">
+                                    <tr>
+                                        <th>Name</th>
+                                        <!-- <th>Code</th> -->
+                                    </tr>  
+                                    <tr *ngFor="let dygnosis of appointmetmentData.diaognosis">
+                                        <td>{{dygnosis?.diagnosisDetails?.name}} </td>
+                                        <!-- <td>{{dygnosis?.diagnosisDetails?.code}}     </td> -->
+                                        
+                                    </tr>
+                                   
+                                </table>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                                <div class="card-header" data-toggle="collapse"href="#FamilyData"
+                                    aria-expanded="true">
+                                    <h4>Family History</h4>
+                                </div>
+                                <div id="FamilyData" class="collapse show">
+                                    <div class="card-body">
+                                        <div class="TableBox FamilyTable"> 
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Relation</th>
+                                                        <th>Year of Birth</th>
+                                                        <th>Conditions</th>
+                                                        <th>Death Year (If)</th>
+                                                        <th>Death Reason (If)</th> 
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Zeeshan</td>
+                                                        <td>Father</td>
+                                                        <td>1958</td>
+                                                        <td>High BP, Anxity <a href="javascript:void(0)" data-toggle="modal" data-target="#DeathReasonModal">+2</a> </td>
+                                                        <td>2020</td>
+                                                        <td>Cardiac Arrest </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Zeeshan</td>
+                                                        <td>Father</td>
+                                                        <td>1958</td>
+                                                        <td>High BP</td>
+                                                        <td>2020</td>
+                                                        <td>Cardiac Arrest </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Zeeshan</td>
+                                                        <td>Father</td>
+                                                        <td>1958</td>
+                                                        <td>High BP</td>
+                                                        <td>2020</td>
+                                                        <td>Cardiac Arrest </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+<div class="ModalBox">
+    <div class="modal" id="FeedbackModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="FeedbackBox">
+                    <a href="javascript:void(0);" class="CloseModal" data-dismiss="modal">×</a>
+                    <h2>Reviews</h2>
+                    <ul>
+                        <li *ngFor="let rat of ratingData">
+                            <div class="FeedbackList">
+                                <aside>
+                                    <figure>
+                                       <img src="{{rat?.userDetails?.profilePic}}"/> 
+                                    </figure>
+                                    <h3>{{rat?.userDetails?.firstName}} {{rat?.userDetails?.lastName}}</h3>
+                                    <h4>{{getTimeFromNow(rat?.createdAt)}}</h4>
+                                </aside>
+    
+                                <p>{{rat?.review}} </p>
+                            </div>
+                        </li>
+                      
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="DeathReasonModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="Decline Reason">
+                        <a href="JavaScript:Void(0);" data-dismiss="modal" class="CloseModal">×</a>
+                        <h3>Conditions</h3>
+                        <p>
+                            High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity, High BP, Anxity
+                        </p>
+                         
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

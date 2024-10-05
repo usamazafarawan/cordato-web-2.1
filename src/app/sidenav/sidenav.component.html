@@ -1,0 +1,233 @@
+<div class="SidenavArea">
+    <div class="SidenavHead">
+        <span class="Close">&times;</span>
+        <figure>
+            <img src="{{userData.profilePic}}">
+        </figure>
+        <h4>{{userData.firstName}} {{userData.lastName}}</h4>
+    </div>
+
+    <div class="SidenavFooter">
+        <ul>    
+            <li *ngIf="appProvider?.current?.loginData?.subscriptiondata?.healthDashboard" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a [routerLink]="['/dashboard-graph']">
+                    <span class="Icon"><img src="assets/images/Sidenav-1.svg"></span>
+                    Dashboard
+                </a>
+            </li>
+            
+            <li *ngIf="appProvider?.current?.loginData?.subscriptiondata?.analaytics" [routerLinkActive]="['active']">
+                <a [routerLink]="['/health-record']"> 
+                    <span class="Icon"><img src="assets/images/Sidenav-5.svg"></span>
+                    My Health Record
+                </a>
+            </li>  
+ 
+            <li  *ngIf="appProvider?.current?.loginData?.subscriptiondata?.virtualDoc" class="dropdown" [routerLinkActive]="['active']">
+                <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <span class="Icon"><img src="assets/images/Sidenav-3.svg"></span>
+                    Appointments
+                </a>
+                <div class="dropdown-menu">
+                    <li [routerLinkActive]="['active']"><a [routerLink]="['/appointment-upcoming']">Upcoming Appointments</a></li>
+                    <li [routerLinkActive]="['active']"><a [routerLink]="['/appointment-past']">Past Appointments</a> </li>
+                </div>
+            </li> 
+            
+            <li >
+                <a href="javascript:void(0);">
+                    <span class="Icon"><img src="assets/images/Sidenav-7.svg"></span>
+                    <!-- Analaytics -->
+                    Analytics
+                </a>
+            </li>
+            
+            <li  *ngIf="appProvider?.current?.loginData?.subscriptiondata?.accessOtherDash" [routerLinkActive]="['active']">
+                <a [routerLink]="['/switch-user']">
+                    <span class="Icon"><img src="assets/images/Sidenav-7.svg"></span>
+                    Switch Users
+                </a>
+            </li>
+ 
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/manage-account']">
+                    <span class="Icon"><img src="assets/images/Sidenav-4.svg"></span>
+                    Manage My Account
+                </a>
+            </li> 
+
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/manage-subscription']">
+                    <span class="Icon"><img src="assets/images/Sidenav-2.svg"></span>
+                    Manage Subscription
+                </a>
+            </li> 
+
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/manage-account-genrate']">
+                    <span class="Icon"><img src="assets/images/Sidenav-2.svg"></span>
+                    Give the Gift of Health
+                </a>
+            </li>        
+
+            <!-- <li  *ngIf="appProvider?.current?.loginData?.subscriptiondata?.checkin" [routerLinkActive]="['active']">
+                <a [routerLink]="['/chekin']">
+                    <span class="Icon"><img src="assets/images/Sidenav-6.svg"></span>
+                    Check In
+                </a>
+            </li>    -->
+
+            <li  *ngIf="appProvider?.current?.loginData?.subscriptiondata?.checkin" [routerLinkActive]="['active']">
+                <a [routerLink]="['/chekin-new']">
+                    <span class="Icon"><img src="assets/images/Sidenav-6.svg"></span>
+                    Check In
+                </a>
+            </li>   
+
+            <li>
+                <a>
+                    <span class="Icon"><img src="assets/images/Sidenav-6.svg"></span>
+                    Road to Recovery
+                </a>
+            </li>
+
+            <li>
+                <a (click)="logout()">
+                    <span class="Icon"><i class="fa fa-sign-out"></i></span>
+                    Logout
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/term-of-service']">
+                    <span class="Icon"><img src="assets/images/Sidenav-10.svg"></span>
+                    Terms of Service
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/privacy']">
+                    <span class="Icon"><img src="assets/images/Sidenav-9.svg"></span>
+                    Privacy
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/contact-support']">
+                    <span class="Icon"><img src="assets/images/Sidenav-8.svg"></span>
+                    Contact Support
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- <div class="SidenavFooter">
+        <ul>    
+            <li *ngIf="appProvider?.current?.loginData?.subscriptiondata?.healthDashboard" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a [routerLink]="['/dashboard']">
+                    <span class="Icon"><img src="assets/images/Sidenav-1.svg"></span>
+                    Dashboard
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/manage-account-genrate']">
+                    <span class="Icon"><img src="assets/images/Sidenav-2.svg"></span>
+                    Give the Gift of Health
+                </a>
+            </li>
+
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/manage-subscription']">
+                    <span class="Icon"><img src="assets/images/Sidenav-2.svg"></span>
+                    Manage Subscription
+                </a>
+            </li>
+ 
+            <li  *ngIf="appProvider?.current?.loginData?.subscriptiondata?.virtualDoc" class="dropdown" [routerLinkActive]="['active']">
+                <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <span class="Icon"><img src="assets/images/Sidenav-3.svg"></span>
+                    Appointments
+                </a>
+                <div class="dropdown-menu">
+                    <li [routerLinkActive]="['active']"><a [routerLink]="['/appointment-upcoming']">Upcoming Appointments</a></li>
+                    <li [routerLinkActive]="['active']"><a [routerLink]="['/appointment-past']">Past Appointments</a> </li>
+                </div>
+              </li> 
+ 
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/manage-account']">
+                    <span class="Icon"><img src="assets/images/Sidenav-4.svg"></span>
+                    Manage My Account
+                </a>
+            </li>
+            <li *ngIf="appProvider?.current?.loginData?.subscriptiondata?.analaytics" [routerLinkActive]="['active']">
+                <a [routerLink]="['/health-record']"> 
+                    <span class="Icon"><img src="assets/images/Sidenav-5.svg"></span>
+                    My Health Record
+                </a>
+            </li>            
+            <li  *ngIf="appProvider?.current?.loginData?.subscriptiondata?.checkin" [routerLinkActive]="['active']">
+                <a [routerLink]="['/chekin']">
+                    <span class="Icon"><img src="assets/images/Sidenav-6.svg"></span>
+                    Check In
+                </a>
+            </li>
+            <li  *ngIf="appProvider?.current?.loginData?.subscriptiondata?.accessOtherDash" [routerLinkActive]="['active']">
+                <a [routerLink]="['/switch-user']">
+                    <span class="Icon"><img src="assets/images/Sidenav-7.svg"></span>
+                    Switch Users
+                </a>
+            </li>
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/contact-support']">
+                    <span class="Icon"><img src="assets/images/Sidenav-8.svg"></span>
+                    Contact Support
+                </a>
+            </li>
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/privacy']">
+                    <span class="Icon"><img src="assets/images/Sidenav-9.svg"></span>
+                    Privacy
+                </a>
+            </li>
+            <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/term-of-service']">
+                    <span class="Icon"><img src="assets/images/Sidenav-10.svg"></span>
+                    Terms of Service
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/']">
+                    <span class="Icon"><i class="fa fa-sign-out"></i></span>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </div> -->
+    <div class="SidenavBody">
+        <a *ngIf="appProvider?.current?.loginData?.subscriptiondata?.virtualDoc" class="Book" [routerLink]="['/appointment-book']">Book Appointment</a>
+        
+        <article>
+            <aside>
+                <a [routerLink]="['/rewards']">
+                    <h2>{{appProvider?.current?.loginData?.recentRewardsTotal}}</h2>
+                    <h3>Available Rewards</h3>
+                </a>
+            </aside>
+            <aside class="text-right">
+                <h4>Membership Renewal Date</h4>
+                <h3>{{getDate(appProvider?.current?.loginData?.subExpireDate)}}</h3>
+            </aside>
+        </article>
+
+        <ul>
+            <li>
+                <p>{{appProvider?.current?.loginData?.recentRewardsValue}}</p>
+                <span>Recent Rewards</span>
+            </li> 
+        </ul>  
+
+       
+    </div> 
+</div>

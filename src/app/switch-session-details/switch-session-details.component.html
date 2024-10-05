@@ -1,0 +1,107 @@
+<app-header></app-header>
+<app-sidenav></app-sidenav>
+
+<div class="Main-wrapper">
+    <div class="Wrapper">
+
+        <div class="BreadcumBox">
+            <h5>All Sessions</h5>
+            <ul>
+                <li><a href="javascript:void(0);"><img src="assets/images/home.svg"></a></li>
+                <li><a href="javascript:void(0);">Home </a></li>
+                <li><a [routerLink]="['/switch-dashboard']" [queryParams]="{userId:userId}">Sessions</a></li>
+                <!-- <li><a [routerLink]="['/session-view']" [queryParams]="{groupId:groupId}">Sessions view</a></li> -->
+                <li><a href="javascript:void(0);">Sessions Details</a></li>
+            </ul>
+        </div>
+		
+        <div class="row">
+        	<div class="col-sm-4">
+        		<div class="SessionsCout Aqua">
+        			<h3>{{dataValue?.parameters?.name}}</h3>
+        			<h4>{{avgData}}</h4> 
+                    <p>{{unit}}</p>
+        		</div>
+        	</div>
+        	<div class="col-sm-8">
+        		<div class="row">
+		        	<div class="col-sm-4 p_left0">
+		        		<div class="SessionsMinCount Blue">
+		        			<h4>Minimum</h4>
+		        			<article>
+		        				<aside>
+		        					<h5>{{minimumData}}</h5>
+		        				</aside>
+		        				<!-- <aside>
+		        					<i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+		        					<h6>6.00</h6>
+		        				</aside> -->
+		        			</article>
+		        			<p>{{unit}}</p>
+		        		</div>
+		        	</div>
+		        	<div class="col-sm-4 p_left0">
+		        		<div class="SessionsMinCount Orange">
+		        			<h4>Std Deviation</h4>
+		        			<article>
+		        				<aside>
+		        					<h5>{{staDaviationData}}</h5>
+		        				</aside>
+		        				<aside>
+		        					<!-- <i class="fa fa-long-arrow-down" aria-hidden="true"></i> -->
+		        					<!-- <h6>-0.90</h6> -->
+		        				</aside>
+		        			</article>
+		        			<p>{{unit}}</p>
+		        		</div>
+		        	</div>
+		        	<div class="col-sm-4 p_left0">
+		        		<div class="SessionsMinCount Pink">
+		        			<h4>Minimum</h4>
+		        			<article>
+		        				<aside>
+		        					<h5>{{maxData}}</h5>
+		        				</aside>
+		        				<aside>
+		        					<!-- <span>=</span> -->
+		        					<h6>0.00</h6>
+		        				</aside>
+		        			</article>
+		        			<p>{{unit}}</p>
+		        		</div>
+		        	</div>
+		        </div>
+		    </div>
+        </div>
+		
+		<div class="SessionTab">
+			<ul>
+				<li (click)="onSelectType('today')">
+					<span class="{{forData=='today'?'active':''}}">Today</span>
+				</li>
+				<li (click)="onSelectType('week')" >
+					<span class="{{forData=='week'?'active':''}}">Week</span>
+				</li>
+				<li (click)="onSelectType('month')">
+					<span class="{{forData=='month'?'active':''}}">Month</span>
+				</li>
+				<li (click)="onSelectType('year')">
+					<span class="{{forData=='year'?'active':''}}">Year</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="SessionGraph" *ngIf="showChart">
+			<apx-chart
+			[series]="chartOptions.series"
+			[chart]="chartOptions.chart"
+			[xaxis]="chartOptions.xaxis"
+			[title]="chartOptions.title"
+			></apx-chart>
+		</div>
+
+         
+    </div>
+</div>
+
+ 

@@ -1,0 +1,47 @@
+<div class="LoginArea LoginReverse">
+    <div class="LoginLeft">
+        <aside>
+            <figure><img src="assets/images/Login.svg" /></figure>
+            <h3>Lorem Ipsum is simply</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever.</p>
+        </aside>
+    </div>
+
+    <div class="LoginRight">
+        <aside>
+            <h1>Login</h1>
+            <h6>Please enter your email and password below to
+                login your account.</h6>
+            <form action="" [formGroup]="formGroup">
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input formControlName="email" type="email" class="form-control" placeholder="Enter Your Email">
+                </div> 
+                <div class="text-danger"
+                    *ngIf="(formGroup.get('email')?.hasError('required') && (formGroup.get('email')?.dirty))|| (formInvalid && !this.formGroup.value.email)">
+                    *Email is required
+                </div>
+                <div class="text-danger"
+                    *ngIf="(formGroup.get('email')?.hasError('pattern') && (formGroup.get('email')?.dirty))">
+                    *Please enter valid email id
+                </div>
+
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input formControlName="newPassword" #x type="password" class="form-control"
+                        placeholder="Enter Password">
+                    <span class="Icon Cross" (click)="x.type=x.type=='password'?'text':'password'"><img
+                            src="assets/images/eye.svg"></span>
+                </div>
+                <div class="text-danger"
+                    *ngIf="(formGroup.get('newPassword')?.hasError('required') && (formGroup.get('newPassword')?.dirty))|| (formInvalid && !this.formGroup.value.newPassword)">
+                    *Password is required
+                </div>
+                <h5><a [routerLink]="['/forgot']">Forgot Password ?</a></h5>
+                <button (click)="onSave()">Login</button>
+            </form>
+            <h4>Don't have an account? <a [routerLink]="['/register-setpassword']">Sign Up</a></h4>
+        </aside>
+    </div>
+</div>
